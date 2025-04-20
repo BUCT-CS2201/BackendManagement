@@ -20,7 +20,7 @@
 		<springboot.version>3.4.0</springboot.version>
 		<mysql.version>8.3.0</mysql.version>
 		<mybatis.version>3.0.3</mybatis.version>
-		<logback.version>1.5.6</logback.version>
+		<!--<logback.version>1.5.6</logback.version>-->
 		<lombok.version>1.18.30</lombok.version>
 		<pagehelper.version>1.4.6</pagehelper.version>
 		<apache.commons.version>3.12.0</apache.commons.version>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
+			<!--<exclusions>
 				<exclusion>
 					<groupId>ch.qos.logback</groupId>
 					<artifactId>logback-classic</artifactId>
@@ -43,7 +43,7 @@
 					<groupId>ch.qos.logback</groupId>
 					<artifactId>logback-core</artifactId>
 				</exclusion>
-			</exclusions>
+			</exclusions>-->
 		</dependency>
 		<!--springboot-test-->
 		<dependency>
@@ -93,7 +93,7 @@
 		</dependency>-->
 
 		<!-- 日志logback -->
-		<dependency>
+		<!--<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
@@ -102,7 +102,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 			<version>${logback.version}</version>
-		</dependency>
+		</dependency>-->
 		<!--lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
