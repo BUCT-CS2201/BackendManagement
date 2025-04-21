@@ -15,7 +15,7 @@ spring:
     resources:
       add-mappings: false
   datasource:
-    url: jdbc:mysql://${cultural-relics.datasource..host}:${cultural-relics.datasource.port}/${cultural-relics.datasource.dbName}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    url: jdbc:mysql://${cultural-relics.datasource.host}:${cultural-relics.datasource.port}/${cultural-relics.datasource.dbName}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
     username: ${cultural-relics.datasource.username}
     password: ${cultural-relics.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver

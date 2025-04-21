@@ -12,7 +12,7 @@ public class StringUtils {
      * @param userId
      * @return
      */
-    public static String generateUserToken(Long userId){
+    public static String getUserToken(Long userId){
         return DigestUtils.md5Hex(String.valueOf(userId));
     }
 }

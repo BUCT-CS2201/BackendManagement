@@ -30,32 +30,31 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO<UserTokenDTO> login(UserLoginDTO userLoginDTO) {
         log.info("登录：{}",userLoginDTO);
+        // 1.用户是否存在
         User user = userMapper.findByPhoneNumber(userLoginDTO.getPhoneNumber());
-        // 账号校验
         if(null==user){
-            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"用户不存在，请先注册");
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"用户不存在");
         }
-        // 无权登录
+        // 2.密码是否正确
+        if(!user.getPassword().equals(userLoginDTO.getPassword())){
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"账号或密码错误");
+        }
+        // 3.用户是否被禁用
+        if(!UserStatusEnum.ENABLE.getStatus().equals(user.getStatus())){
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"用户已被禁用");
+        }
+        // 4.用户是否有权登录
         if(!UserRoleTypeEnum.ADMIN.getType().equals(user.getRoleType())){
             throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"用户无权登录");
         }
-        // 用户被禁用
-        if(UserStatusEnum.DISABLE.getStatus().equals(user.getStatus())){
-            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"用户已被禁用");
-        }
-        // 密码校验
-        if(!user.getPassword().equals(userLoginDTO.getPassword())){
-            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"密码错误");
-        }
-        // todo redis验证用户是否在线，防重复登陆
+        // todo 5.查redis，看用户是否已在线
+        String token = StringUtils.getUserToken(user.getUserId());
 
-        // 初次登录，生成用户token
-        String token = StringUtils.generateUserToken(user.getUserId());
-        // 封装tokenDTO
+        // 6.生成tokenDTO
         UserTokenDTO userTokenDTO = new UserTokenDTO();
-        userTokenDTO.setToken(token);
         BeanUtils.copyProperties(user,userTokenDTO);
-        // todo UserToken存入redis
+        userTokenDTO.setToken(token);
+        // todo 7.存入redis
 
         // 返回UserToken对象用于前端使用
         return ResponseUtils.success(userTokenDTO);
