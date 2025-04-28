@@ -18,7 +18,6 @@ public interface UserMapper {
     User findByPhoneNumber(String phoneNumber);
 
     @AutoFill(OperationTypeEnum.UPDATE)
-    @Update("update user set password=#{password} where user_id=#{userId}")
     void update(User userFoUpdate);
 
     /**

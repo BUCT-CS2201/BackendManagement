@@ -31,7 +31,7 @@ app.config.globalProperties.Confirm = Confirm;
 app.mount('#app')
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(res => res.meta.requireAuth)) { // 验证是否需要登陆
+  if (to.matched.some(res => res.meta.requiresAuth)) { // 验证是否需要登陆
     var token=localStorage.getItem('token');
     if (token) { // 查询本地存储信息是否已经登陆
       next();

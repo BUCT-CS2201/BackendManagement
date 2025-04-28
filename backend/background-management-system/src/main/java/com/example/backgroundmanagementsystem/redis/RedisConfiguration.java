@@ -14,7 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfiguration {
-    @Value("${spring.data.redis.database}")
+    /*@Value("${spring.data.redis.database}")
     private int dataBase;
     @Value("${spring.data.redis.host}")
     private String host;
@@ -31,7 +31,7 @@ public class RedisConfiguration {
     @Value("${spring.data.redis.lettuce.pool.max-active}")
     private int maxActive;
     @Value("${spring.data.redis.lettuce.pool.max-wait}")
-    private int maxWait;
+    private int maxWait;*/
 
     /**
      * 配置线程池连接工厂LettuceConnectionFactory

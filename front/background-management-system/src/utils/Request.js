@@ -70,9 +70,6 @@ const request = (config) =>{
     for(let key in params){
         formData.append(key,params[key]==undefined?"":params[key]);
     }
-    if (dataType != null && dataType == 'json') {
-        contentType = contentTypeJson;
-    }
     // 携带token
     const token = localStorage.getItem('token');
     // 请求头
