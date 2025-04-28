@@ -113,7 +113,7 @@
             { min: 6, max: 20, message: '密码长度在 6 到 20 个字符', trigger: 'blur' }
         ]
     }
-    // 发送短信验证码对话框对话框
+    // 发送短信验证码对话框
     const getCheckCodeFormVisible = ref(false);
     // 验证码表单引用
     const getCheckCodeFormRef = ref(null);

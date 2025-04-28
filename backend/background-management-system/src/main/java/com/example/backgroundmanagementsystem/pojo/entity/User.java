@@ -13,17 +13,45 @@ public class User extends BaseEntity{
      */
     private Long userId;
     /**
-     * 用户名
+     * 电话
      */
-    private String userName;
+    private String phoneNumber;
     /**
      * 密码
      */
     private String password;
     /**
-     * 电话
+     * 身份证号
      */
-    private String phoneNumber;
+    private String idNumber;
+    /**
+     * 用户名
+     */
+    private String name;
+    /**
+     * 个人介绍
+     */
+    private String description;
+    /**
+     * 性别，0女 1男
+     */
+    private Integer gender;
+    /**
+     * 年龄
+     */
+    private Integer age;
+    /**
+     * 地址
+     */
+    private String address;
+    /**
+     * 微信
+     */
+    private String weChat;
+    /**
+     * qq
+     */
+    private String qq;
     /**
      * 用户状态，0禁用，1启用
      */

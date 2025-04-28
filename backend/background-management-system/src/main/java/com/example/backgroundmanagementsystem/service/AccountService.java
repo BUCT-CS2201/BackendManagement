@@ -11,4 +11,24 @@ public interface AccountService {
      * @return
      */
     ResponseVO<UserTokenDTO> login(UserLoginDTO userLoginDTO);
+
+    /**
+     * 获取验证码
+     * @param phoneNumber
+     */
+    void getCheckCode(String phoneNumber);
+
+    /**
+     * 验证码校验
+     * @param phoneNumber
+     * @param checkCode
+     */
+    void submitCheckCode(String phoneNumber, String checkCode);
+
+    /**
+     * 忘记密码并修改密码
+     * @param phoneNumber
+     * @param newPassword
+     */
+    void forgetAndChangePassword(String phoneNumber, String newPassword);
 }
