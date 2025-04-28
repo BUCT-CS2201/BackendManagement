@@ -2,12 +2,14 @@ package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.pojo.dto.UserLoginDTO;
+import com.example.backgroundmanagementsystem.pojo.dto.UserPasswordChangeDTO;
 import com.example.backgroundmanagementsystem.pojo.dto.UserTokenDTO;
 import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
 import com.example.backgroundmanagementsystem.service.AccountService;
 import com.example.backgroundmanagementsystem.utils.ResponseUtils;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,6 +54,28 @@ public class AccountController {
     @PostMapping("/forgetAndChangePassword")
     public ResponseVO forgetAndChangePassword(@NotEmpty String phoneNumber,@NotEmpty String newPassword){
         accountService.forgetAndChangePassword(phoneNumber,newPassword);
+        return ResponseUtils.success();
+    }
+
+    /**
+     * 登出
+     * @param userId
+     * @return
+     */
+    @PostMapping("/logout")
+    public ResponseVO logout(@NotNull Long userId){
+        accountService.logout(userId);
+        return ResponseUtils.success();
+    }
+
+    /**
+     * 修改密码
+     * @param userPasswordChangeDTO
+     * @return
+     */
+    @PostMapping("/changePassword")
+    public ResponseVO changePassword(@Valid UserPasswordChangeDTO userPasswordChangeDTO){
+        accountService.changePassword(userPasswordChangeDTO);
         return ResponseUtils.success();
     }
 }

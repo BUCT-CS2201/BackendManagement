@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.service;
 
 import com.example.backgroundmanagementsystem.pojo.dto.UserLoginDTO;
+import com.example.backgroundmanagementsystem.pojo.dto.UserPasswordChangeDTO;
 import com.example.backgroundmanagementsystem.pojo.dto.UserTokenDTO;
 import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
 
@@ -31,4 +32,16 @@ public interface AccountService {
      * @param newPassword
      */
     void forgetAndChangePassword(String phoneNumber, String newPassword);
+
+    /**
+     * 登出
+     * @param userId
+     */
+    void logout(Long userId);
+
+    /**
+     * 修改密码
+     * @param userPasswordChangeDTO
+     */
+    void changePassword(UserPasswordChangeDTO userPasswordChangeDTO);
 }

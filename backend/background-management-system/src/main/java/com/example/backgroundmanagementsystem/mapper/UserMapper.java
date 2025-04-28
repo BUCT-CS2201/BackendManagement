@@ -17,6 +17,9 @@ public interface UserMapper {
     @Select("select * from user where phone_number=#{phoneNumber}")
     User findByPhoneNumber(String phoneNumber);
 
+    @Select("select * from user where user_id=#{userId}")
+    User findByUserId(Long userId);
+
     @AutoFill(OperationTypeEnum.UPDATE)
     void update(User userFoUpdate);
 
