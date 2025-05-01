@@ -30,14 +30,15 @@
         where user_id=#{userId}
     </update>
     <!--查询-->
-    <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.entity.User">
+    <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.UserVO">
         select * from user
         <where>
             <if test="userId!=null">and user_id=#{userId}</if>
             <if test="phoneNumber!=null">and phone_number like concat('%',#{phoneNumber},'%')</if>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
             <if test="idNumber!=null">and id_number like concat('%',#{idNumber},'%')</if>
-            <if test="roleType!=null">and role_type=#{roleType},</if>
-            <if test="status!=null">and status=#{status},</if>
+            <if test="roleType!=null">and role_type=#{roleType}</if>
+            <if test="status!=null">and status=#{status}</if>
         </where>
         order by role_type desc, user_id asc
     </select>

@@ -1,0 +1,56 @@
+package com.example.backgroundmanagementsystem.controller;
+
+import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
+import com.example.backgroundmanagementsystem.pojo.entity.User;
+import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
+import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
+import com.example.backgroundmanagementsystem.pojo.vo.UserVO;
+import com.example.backgroundmanagementsystem.service.UserService;
+import com.example.backgroundmanagementsystem.utils.ResponseUtils;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/user")
+@RequiredArgsConstructor
+public class UserController {
+    private final UserService userService;
+
+    /**
+     * 加载用户列表
+     * @param userPageQueryDTO
+     * @return
+     */
+    @PostMapping("/loadUserList")
+    @PageQueryAutoFill
+    public ResponseVO<PageResultVO> loadUserList(UserPageQueryDTO userPageQueryDTO){
+        return ResponseUtils.success(userService.loadUserList(userPageQueryDTO));
+    }
+
+    /**
+     * 添加或修改用户
+     * @param user
+     * @return
+     */
+    @PostMapping("/addOrUpdateUser")
+    public ResponseVO addOrUpdateUser(@Valid User user){
+        userService.addOrUpdateUser(user);
+        return ResponseUtils.success();
+    }
+
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    @PostMapping("/deleteUser")
+    public ResponseVO deleteUser(@NotNull Long userId){
+        userService.deleteUser(userId);
+        return ResponseUtils.success();
+    }
+}

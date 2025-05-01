@@ -2,8 +2,11 @@ package com.example.backgroundmanagementsystem.mapper;
 
 import com.example.backgroundmanagementsystem.annotations.AutoFill;
 import com.example.backgroundmanagementsystem.enums.OperationTypeEnum;
+import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
+import com.example.backgroundmanagementsystem.pojo.vo.UserVO;
 import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -28,5 +31,11 @@ public interface UserMapper {
      * @param user
      * @return
      */
-    Page<User> findBatch(User user);
+    Page<UserVO> findBatch(UserPageQueryDTO user);
+
+    @Select("select * from user where id_number=#{idNumber}")
+    User findByIdNumber(String idNumber);
+
+    @Delete("delete from user where user_id=#{userId}")
+    void delete(Long userId);
 }

@@ -33,6 +33,11 @@ const router = createRouter({
           component: () => import('@/views/user/UserManagement.vue'),
         },
         {
+          path: 'userCreateOrUpdate',
+          name: 'userCreateOrUpdate',
+          component: () => import('@/views/user/UserCreateOrUpdate.vue'),
+        },
+        {
           path: 'review',
           name: 'review',
           component: () => import('@/views/review/ReviewManagement.vue'),

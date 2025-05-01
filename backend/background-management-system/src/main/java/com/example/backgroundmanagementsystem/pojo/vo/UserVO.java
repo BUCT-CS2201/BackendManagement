@@ -1,7 +1,5 @@
-package com.example.backgroundmanagementsystem.pojo.entity;
+package com.example.backgroundmanagementsystem.pojo.vo;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseEntity{
+public class UserVO {
     /**
      * 用户id
      */
@@ -17,16 +15,10 @@ public class User extends BaseEntity{
     /**
      * 电话
      */
-    @NotEmpty
     private String phoneNumber;
-    /**
-     * 密码
-     */
-    private String password;
     /**
      * 身份证号
      */
-    @NotEmpty
     private String idNumber;
     /**
      * 用户名
@@ -59,11 +51,9 @@ public class User extends BaseEntity{
     /**
      * 用户状态，0禁用，1启用
      */
-    @NotNull
     private Integer status;
     /**
      * 用户角色，0用户，1管理员
      */
-    @NotNull
     private Integer roleType;
 }
