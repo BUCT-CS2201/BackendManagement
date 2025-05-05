@@ -11,7 +11,7 @@
                 <el-icon style="color:#0483d4;margin-left: 8px;">
                     <Unlock style="width: 100px;height: 50px;" />
                 </el-icon>
-                <span style="margin-left: 13px;">讲解审核</span>
+                <span style="margin-left: 13px;">审核管理</span>
             </el-menu-item>
             
             <el-sub-menu>
@@ -34,28 +34,28 @@
                         <Collection style="width: 20px; height: 20px;" />
                     </el-icon>
                     <span style="margin-left: 8px;">藏品信息</span>
-                </el-menu-item>
+                </el-menu-item> 
 
-                <el-menu-item index="/manage/comment">
-                    <el-icon style="color:#0483d4;margin-left: 8px;">
-                        <ChatSquare style="width: 20px; height: 20px;" />
-                    </el-icon>
-                    <span style="margin-left: 8px;">用户点评</span>
-                </el-menu-item>
-
-                <el-menu-item index="/manage/news">
+                <el-menu-item index="/manage/notice">
                     <el-icon style="color:#0483d4;margin-left: 8px;">
                         <Document style="width: 20px; height: 20px;" />
                     </el-icon>
-                    <span style="margin-left: 8px;">新闻</span>
+                    <span style="margin-left: 8px;">公告</span>
                 </el-menu-item>
             </el-sub-menu>
 
-            <el-menu-item index="/manage/backup">
+            <el-menu-item index="/manage/log">
+                    <el-icon style="color:#0483d4;margin-left: 8px;">
+                        <ChatSquare style="width: 20px; height: 20px;" />
+                    </el-icon>
+                    <span style="margin-left: 8px;">管理员日志</span>
+                </el-menu-item>
+
+            <el-menu-item index="/manage/database">
                 <el-icon style="color:#0483d4;margin-left: 8px;">
                     <Suitcase style="width: 100px;height: 50px;" />
                 </el-icon>
-                <span style="margin-left: 13px;">数据备份</span>
+                <span style="margin-left: 13px;">数据备份与恢复</span>
             </el-menu-item>
         </el-menu>
     </el-aside>

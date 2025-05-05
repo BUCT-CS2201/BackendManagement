@@ -53,19 +53,19 @@ const router = createRouter({
           component: () => import('@/views/relic/RelicManagement.vue'),
         },
         {
-          path: 'comment',
-          name: 'comment',
-          component: () => import('@/views/comment/CommentManagement.vue'),
+          path: 'log',
+          name: 'log',
+          component: () => import('@/views/log/LogManagement.vue'),
         },
         {
-          path: 'news',
-          name: 'news',
-          component: () => import('@/views/news/NewsManagement.vue'),
+          path: 'notice',
+          name: 'notice',
+          component: () => import('@/views/notice/NoticeManagement.vue'),
         },
         {
-          path: 'backup',
-          name: 'backup',
-          component: () => import('@/views/backup/BackupManagement.vue'),
+          path: 'database',
+          name: 'database',
+          component: () => import('@/views/database/DatabaseManagement.vue'),
         },
       ]
     },

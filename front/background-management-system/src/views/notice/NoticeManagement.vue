@@ -1,6 +1,6 @@
 <template>
     <div>
-        数据备份管理
+        公告管理
     </div>
 </template>
 

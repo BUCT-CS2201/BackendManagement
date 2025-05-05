@@ -1,6 +1,6 @@
 <template>
     <div>
-        新闻管理
+        数据备份和恢复管理
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        用户点评管理
+        管理员日志管理
     </div>
 </template>
 
