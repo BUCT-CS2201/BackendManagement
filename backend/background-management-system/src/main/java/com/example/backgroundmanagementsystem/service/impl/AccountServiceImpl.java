@@ -2,7 +2,7 @@ package com.example.backgroundmanagementsystem.service.impl;
 import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.enums.UserRoleTypeEnum;
-import com.example.backgroundmanagementsystem.enums.UserStatusEnum;
+import com.example.backgroundmanagementsystem.enums.UserAccountStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
 import com.example.backgroundmanagementsystem.mapper.UserMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.UserLoginDTO;
@@ -17,7 +17,6 @@ import com.example.backgroundmanagementsystem.utils.ResponseUtils;
 import com.example.backgroundmanagementsystem.utils.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
             throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"账号或密码错误");
         }
         // 3.用户是否被禁用
-        if(!UserStatusEnum.ENABLE.getStatus().equals(user.getStatus())){
+        if(!UserAccountStatusEnum.ENABLE.getStatus().equals(user.getAccountStatus())){
             throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"用户已被禁用");
         }
         // 4.用户是否有权登录

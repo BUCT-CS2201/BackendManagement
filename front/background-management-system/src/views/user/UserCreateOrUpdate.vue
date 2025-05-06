@@ -15,9 +15,14 @@
             <el-option v-for="item in roleTypeOptions" :key="item.value" :label="item.label" :value="item.value"/>
          </el-select>
        </el-form-item>
-       <el-form-item label="状态">
-         <el-select v-model="dataForm.status" placeholder="请选择状态">
-            <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value"/>
+       <el-form-item label="账户状态">
+         <el-select v-model="dataForm.accountStatus" placeholder="请选择状态">
+            <el-option v-for="item in accountStatusOptions" :key="item.value" :label="item.label" :value="item.value"/>
+         </el-select>
+       </el-form-item>
+       <el-form-item label="评论状态">
+         <el-select v-model="dataForm.commentStatus" placeholder="请选择状态">
+            <el-option v-for="item in commentStatusOptions" :key="item.value" :label="item.label" :value="item.value"/>
          </el-select>
        </el-form-item>
        <el-form-item style="margin-top: 30px;">
@@ -42,7 +47,8 @@
       name:'',
       idNumber:'',
       roleType: 0,
-      status: 1,
+      accountStatus: 1,
+      commentStatus: 1,
    });
    const roleTypeOptions = ref([
       {
@@ -54,13 +60,23 @@
          value:0
       }
    ]);
-   const statusOptions = ref([
+   const accountStatusOptions = ref([
       {
          label:'启用',
          value:1
       },
       {
          label:'禁用',
+         value:0
+      }
+   ]);
+   const commentStatusOptions = ref([
+      {
+         label:'允许',
+         value:1
+      },
+      {
+         label:'禁止',
          value:0
       }
    ]);
@@ -119,7 +135,8 @@
          dataForm.name = row.name;
          dataForm.idNumber = row.idNumber;
          dataForm.roleType = row.roleType;
-         dataForm.status = row.status;
+         dataForm.accountStatus = row.accountStatus;
+         dataForm.commentStatus = row.commentStatus;
       }
    })
 </script>

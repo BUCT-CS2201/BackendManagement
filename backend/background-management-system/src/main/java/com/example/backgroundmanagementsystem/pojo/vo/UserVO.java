@@ -1,5 +1,6 @@
 package com.example.backgroundmanagementsystem.pojo.vo;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,10 +49,13 @@ public class UserVO {
      * qq
      */
     private String qq;
+    @NotNull
+    private Integer accountStatus;
     /**
-     * 用户状态，0禁用，1启用
+     * 评论状态，0禁止评论，1允许评论
      */
-    private Integer status;
+    @NotNull
+    private Integer commentStatus;
     /**
      * 用户角色，0用户，1管理员
      */

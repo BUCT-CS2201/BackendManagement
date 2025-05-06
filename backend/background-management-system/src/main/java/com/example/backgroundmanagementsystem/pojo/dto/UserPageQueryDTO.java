@@ -12,6 +12,6 @@ public class UserPageQueryDTO extends PageDTO{
     private String phoneNumber;
     private String idNumber;
     private String name;
-    private Integer status;
+    private Integer accountStatus;
     private Integer roleType;
 }

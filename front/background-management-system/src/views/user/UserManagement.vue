@@ -21,8 +21,8 @@
               <el-option label="用户" value="0"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="状态">
-            <el-select v-model="searchForm.status" placeholder="请选择" clearable>
+          <el-form-item label="账户状态">
+            <el-select v-model="searchForm.accountStatus" placeholder="请选择" clearable>
               <el-option label="启用" value="1"></el-option>
               <el-option label="禁用" value="0"></el-option>
             </el-select>
@@ -60,10 +60,15 @@
       <template #slotRoleType="{index,row}">
         <div>{{ row.roleType == 1 ? "管理员" : "用户" }}</div>
       </template>
-      <!-- 状态类型 -->
-      <template #slotStatus="{index,row}">
-        <div v-if="row.status === 0" style="color: #F56C6C;">禁用</div>
-        <div v-else-if="row.status === 1" style="color: #67C23A;">启用</div>
+      <!-- 账户状态类型 -->
+      <template #slotAccountStatus="{index,row}">
+        <div v-if="row.accountStatus === 0" style="color: #F56C6C;">禁用</div>
+        <div v-else-if="row.accountStatus === 1" style="color: #67C23A;">启用</div>
+      </template>
+      <!-- 评论状态类型 -->
+      <template #slotCommentStatus="{index,row}">
+        <div v-if="row.commentStatus === 0" style="color: #F56C6C;">禁止</div>
+        <div v-else-if="row.commentStatus === 1" style="color: #67C23A;">允许</div>
       </template>
       <!-- 操作 -->
       <template #slotOperation="{index,row}">
@@ -129,10 +134,17 @@ const columns = [
     fixed: false
   },
   {
-    label: "状态",
-    prop: "status",
+    label: "账户状态",
+    prop: "accountStatus",
     width: "150",
-    scopedSlots: "slotStatus",
+    scopedSlots: "slotAccountStatus",
+    fixed: false
+  },
+  {
+    label: "评论状态",
+    prop: "commentStatus",
+    width: "150",
+    scopedSlots: "slotCommentStatus",
     fixed: false
   },
   {

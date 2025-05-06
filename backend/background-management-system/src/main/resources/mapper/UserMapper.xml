@@ -4,9 +4,9 @@
 <mapper namespace="com.example.backgroundmanagementsystem.mapper.UserMapper">
     <!--新增-->
     <insert id="insert">
-        insert into user(phone_number, password, id_number, name, description, gender, age, address, wechat, qq,status,role_type,create_time,update_time)
+        insert into user(phone_number, password, id_number, name, description, gender, age, address, wechat, qq,account_status,comment_status,role_type,create_time,update_time)
             VALUES
-        (#{phoneNumber},#{password},#{idNumber},#{name},#{description},#{gender},#{age},#{address},#{weChat},#{qq},#{status},#{roleType},#{createTime},#{updateTime})
+        (#{phoneNumber},#{password},#{idNumber},#{name},#{description},#{gender},#{age},#{address},#{weChat},#{qq},#{accountStatus},#{commentStatus},#{roleType},#{createTime},#{updateTime})
     </insert>
     <!--修改-->
     <update id="update">
@@ -23,7 +23,8 @@
             <if test="weChat!=null">wechat=#{weChat},</if>
             <if test="qq!=null">qq=#{qq},</if>
             <if test="roleType!=null">role_type=#{roleType},</if>
-            <if test="status!=null">status=#{status},</if>
+            <if test="accountStatus!=null">account_status=#{accountStatus},</if>
+            <if test="commentStatus!=null">comment_status=#{commentStatus},</if>
             <if test="createTime!=null">create_time=#{createTime},</if>
             <if test="updateTime!=null">update_time=#{updateTime},</if>
         </set>
@@ -38,7 +39,7 @@
             <if test="name!=null">and name like concat('%',#{name},'%')</if>
             <if test="idNumber!=null">and id_number like concat('%',#{idNumber},'%')</if>
             <if test="roleType!=null">and role_type=#{roleType}</if>
-            <if test="status!=null">and status=#{status}</if>
+            <if test="accountStatus!=null">and account_status=#{accountStatus}</if>
         </where>
         order by role_type desc, user_id asc
     </select>

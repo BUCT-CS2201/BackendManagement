@@ -1,20 +1,17 @@
 package com.example.backgroundmanagementsystem.enums;
 
-/**
- * 用户状态
- */
-public enum UserStatusEnum {
-    DISABLE(0,"禁用"),
-    ENABLE(1,"启用");
+public enum UserCommentStatusEnum {
+    DISABLE(0,"禁止评论"),
+    ENABLE(1,"允许评论");
     private Integer status;
     private String description;
-    UserStatusEnum(Integer status,String description){
+    UserCommentStatusEnum(Integer status, String description){
         this.status = status;
         this.description = description;
     }
 
-    public static UserStatusEnum getByStatus(Integer status){
-        for (UserStatusEnum value : UserStatusEnum.values()) {
+    public static UserCommentStatusEnum getByStatus(Integer status){
+        for (UserCommentStatusEnum value : UserCommentStatusEnum.values()) {
             if (value.getStatus().equals(status)){
                 return value;
             }

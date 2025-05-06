@@ -57,10 +57,15 @@ public class User extends BaseEntity{
      */
     private String qq;
     /**
-     * 用户状态，0禁用，1启用
+     * 账户状态，0禁用，1启用
      */
     @NotNull
-    private Integer status;
+    private Integer accountStatus;
+    /**
+     * 评论状态，0禁止评论，1允许评论
+     */
+    @NotNull
+    private Integer commentStatus;
     /**
      * 用户角色，0用户，1管理员
      */
