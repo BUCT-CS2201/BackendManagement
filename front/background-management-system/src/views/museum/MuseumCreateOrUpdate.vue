@@ -51,18 +51,18 @@
          { min: 1, max: 100, message: '博物馆名称长度在 1 到 100 个字符', trigger: 'blur' }
       ],
       description: [
-         { required: true, message: '请输入博物馆介绍', trigger: 'blur' }
+         { required: false, message: '请输入博物馆介绍', trigger: 'blur' }
       ],
       address: [
-         { required: true, message: '请输入博物馆地址', trigger: 'blur' },
+         { required: false, message: '请输入博物馆地址', trigger: 'blur' },
          { min: 1, max: 100, message: '博物馆地址长度在 1 到 100 个字符', trigger: 'blur' }
       ],
       websiteUrl: [
-         { required: true, message: '请输入网址', trigger: 'blur' },
+         { required: false, message: '请输入网址', trigger: 'blur' },
          { pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, message: '网址格式不正确', trigger: 'blur' }
       ],
       bookingUrl: [
-         { required: true, message: '请输入购票网站', trigger: 'blur' },
+         { required: false, message: '请输入购票网站', trigger: 'blur' },
          { pattern: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, message: '购票网站格式不正确', trigger: 'blur' }
       ]
    }

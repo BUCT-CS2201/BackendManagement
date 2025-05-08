@@ -23,20 +23,10 @@
     </update>
     <!-- 批量查询博物馆信息 -->
     <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.MuseumVO">
-        select
-        museum_id,
-        museum_name,
-        description,
-        address,
-        website_url,
-        booking_url,
-        create_time,
-        update_time
-        from museum
+        select * from museum
         <where>
             <if test="museumId != null">and museum_id = #{museumId}</if>
             <if test="museumName != null">and museum_name like concat('%', #{museumName}, '%')</if>
-            <if test="address != null">and address like concat('%', #{address}, '%')</if>
         </where>
         order by museum_id asc
     </select>

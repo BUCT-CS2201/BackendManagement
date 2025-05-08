@@ -11,8 +11,4 @@ import lombok.NoArgsConstructor;
 public class MuseumPageQueryDTO extends PageDTO{
     private Long museumId;
     private String museumName;
-    private String description;
-    private String address;
-    private String websiteUrl;
-    private String bookingUrl;
 }

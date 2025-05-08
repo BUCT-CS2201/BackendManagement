@@ -2,7 +2,7 @@
   <el-card>
     <template #header>
       <div>
-        <el-form ref="searchFomRef" :model="searchForm" label-width="80px" :inline="true">
+        <el-form ref="searchFomRef" :model="searchForm" label-width="100px" :inline="true">
           <el-form-item label="博物馆id">
             <el-input v-model="searchForm.museumId" placeholder="请输入" clearable></el-input>
           </el-form-item>

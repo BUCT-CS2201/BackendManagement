@@ -29,13 +29,12 @@ public class MuseumServicempl implements MuseumService {
         log.info("博物馆分页查询:{}",museumPageQueryDTO);
         PageHelper.startPage(museumPageQueryDTO.getPageNo(),museumPageQueryDTO.getPageSize());
         // 分页查询
-        try (Page<MuseumVO> page = museumMapper.findBatch(museumPageQueryDTO)) {
-            return new PageResultVO(museumPageQueryDTO.getPageNo(), museumPageQueryDTO.getPageSize(), page.getTotal(), page.getResult());
-        }
+        Page<MuseumVO> page = museumMapper.findBatch(museumPageQueryDTO);
+        return new PageResultVO(museumPageQueryDTO.getPageNo(), museumPageQueryDTO.getPageSize(), page.getTotal(), page.getResult());
     }
 
     /**
-     * 新增或修改用户
+     * 新增或修改博物馆
      * @param museum
      */
     @Override
@@ -53,7 +52,7 @@ public class MuseumServicempl implements MuseumService {
         }else{
             // 修改
             // 要修改的名称被使用
-            if(null!=existMuseumName && !museum.getMuseumName().equals(existMuseumName.getMuseumName())){
+            if(null!=existMuseumName && !museum.getMuseumId().equals(existMuseumName.getMuseumId())){
                 throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"该名称已被使用");
             }
             // 修改
@@ -62,7 +61,7 @@ public class MuseumServicempl implements MuseumService {
     }
 
     /**
-     * 删除用户
+     * 删除博物馆
      * @param museumId
      */
     @Override
