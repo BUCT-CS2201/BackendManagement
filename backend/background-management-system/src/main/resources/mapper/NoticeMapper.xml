@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.backgroundmanagementsystem.mapper.NoticeMapper">
+    <!--新增-->
+    <insert id="insert">
+        insert into notice(name, title, content, time, ispublic)
+            VALUES
+        (#{name},#{title},#{content},#{time},#{ispublic})
+    </insert>
+    <!--修改-->
+    <update id="update">
+        update notice
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="title!=null">title=#{title},</if>
+            <if test="content!=null">content=#{content},</if>
+            <if test="time!=null">time=#{time},</if>
+            <if test="ispublic!=null">ispublic=#{ispublic},</if>
+        </set>
+        where notice_id=#{notice_id}
+    </update>
+    <resultMap id="NoticeMap" type="com.example.backgroundmanagementsystem.pojo.vo.NoticeVO">
+        <result column="notice_id" jdbcType="INTEGER" property="notice_id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="ispublic" jdbcType="TINYINT" property="ispublic"/>
+    </resultMap>
+    <!--查询-->
+    <select id="findBatch" resultMap="NoticeMap" resultType="com.example.backgroundmanagementsystem.pojo.vo.NoticeVO">
+        select * from notice
+        <where>
+            <if test="notice_id!=null">and notice_id=#{notice_id}</if>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
+            <if test="content!=null">and content like concat('%',#{content},'%')</if>
+            <if test="title!=null">and title like concat('%',#{title},'%')</if>
+            <if test="time!=null">and time like concat('%',#{time},'%')</if>
+            <if test="ispublic!=null">and ispublic=#{ispublic}</if>
+        </where>
+        order by notice_id asc
+    </select>
+    <select id="findall" resultMap="NoticeMap">
+        select * from notice
+    </select>
+</mapper>

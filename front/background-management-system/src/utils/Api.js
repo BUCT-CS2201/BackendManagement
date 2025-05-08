@@ -12,5 +12,9 @@ const api={
     loadUserList: "/user/loadUserList", // 加载用户列表
     addOrUpdateUser: "/user/addOrUpdateUser", // 添加或修改用户
     deleteUser: "/user/deleteUser", // 删除用户
+    // 公告模块
+    loadNoticeList: "/notice/loadNoticeList", // 加载公告列表
+    addOrUpdateNotice: "/notice/addOrUpdateNotice", // 添加公告
+    deleteNotice: "/notice/deleteNotice", // 删除公告
 }
 export default api;

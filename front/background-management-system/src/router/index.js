@@ -63,6 +63,11 @@ const router = createRouter({
           component: () => import('@/views/notice/NoticeManagement.vue'),
         },
         {
+          path: 'noticeCreateOrUpdate',
+          name: 'noticeCreateOrUpdate',
+          component: () => import('@/views/notice/NoticeCreateOrUpdate.vue'),
+        },
+        {
           path: 'database',
           name: 'database',
           component: () => import('@/views/database/DatabaseManagement.vue'),
