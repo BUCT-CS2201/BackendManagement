@@ -21,7 +21,7 @@ public interface NoticeService {
 
     /**
      * 删除公告
-     * @param notice_id
+     * @param noticeId
      */
-    void deleteNotice(Long notice_id);
+    void deleteNotice(Long noticeId);
 }

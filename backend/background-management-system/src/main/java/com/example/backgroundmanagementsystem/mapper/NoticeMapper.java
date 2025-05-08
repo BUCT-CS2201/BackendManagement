@@ -20,15 +20,6 @@ public interface NoticeMapper {
     @AutoFill(OperationTypeEnum.INSERT)
     void insert(Notice notice);
 
-    @Select("select * from notice where title=#{title}")
-    Notice findByTitle(String title);
-
-    @Select("select * from name where name=#{name}")
-    Notice findByName(String name);
-
-    @Select("select * from notice where notice_id=#{notice_id}")
-    Notice findByNoticeId(Long notice_id);
-
     @AutoFill(OperationTypeEnum.UPDATE)
     void update(Notice noticeFoUpdate);
 
@@ -39,9 +30,13 @@ public interface NoticeMapper {
      */
     Page<NoticeVO> findBatch(NoticePageQueryDTO notice);
 
-    @Delete("delete from notice where notice_id=#{notice_id}")
-    void delete(Long notice_id);
+    @Delete("delete from museum_notice where notice_id=#{noticeId}")
+    void delete(Long noticeId);
 
-
-    List<NoticeVO> findall();
+    /**
+     * 根据博物馆id删除
+     * @param museumId
+     */
+    @Delete("delete from museum_notice where museum_id=#{museumId}")
+    void deleteByMuseumId(Long museumId);
 }

@@ -2,15 +2,26 @@
     <el-card>
       <template #header>
         <div>
-          <el-form ref="searchFomRef" :model="searchForm" label-width="80px" :inline="true">           
-            <el-form-item label="查询标题">
-              <el-input v-model="searchForm.title" placeholder="支持模糊搜索" clearable></el-input>
+          <el-form ref="searchFomRef" :model="searchForm" label-width="100px" :inline="true">
+            <el-form-item label="公告id">
+              <el-input v-model="searchForm.noticeId" placeholder="请输入" clearable></el-input>
             </el-form-item>
-            <el-form-item label="查询姓名">
-              <el-input v-model="searchForm.name" placeholder="支持模糊搜索" clearable></el-input>
+            <el-form-item label="博物馆id">
+              <el-input v-model="searchForm.museumId" placeholder="请输入" clearable></el-input>
+            </el-form-item>           
+            <el-form-item label="公告标题">
+              <el-input v-model="searchForm.noticeTitle" placeholder="支持模糊搜索" clearable></el-input>
             </el-form-item>
-            <el-form-item label="查询时间">
-              <el-input v-model="searchForm.time" placeholder="支持模糊搜索" clearable></el-input>
+            <el-form-item label="发布人">
+              <el-input v-model="searchForm.noticeAuthor" placeholder="支持模糊搜索" clearable></el-input>
+            </el-form-item>
+            <el-form-item label="公告时间起始">
+              <el-date-picker v-model="searchForm.noticeTimeStart" type="datetime"
+                            value-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择" />
+            </el-form-item>
+            <el-form-item label="公告时间结束">
+              <el-date-picker v-model="searchForm.noticeTimeEnd" type="datetime"
+                            value-format="YYYY-MM-DD HH:mm:ss" placeholder="请选择" />
             </el-form-item>
             <el-row>
               <el-col style="margin-left: 900px;">
@@ -25,37 +36,38 @@
       </template>
       <Table :columns="columns" :fetch="loadDataList" :dataSource="tableData" :options="tableOptions">
         <!-- 表单列插槽插入 -->
-         <!-- id -->
-        <template #slotNotice_id="{index,row}">
-          {{ row.notice_id }}
+        <!-- 公告id -->
+        <template #slotNoticeId="{index,row}">
+          {{ row.noticeId }}
         </template>
-        <!-- 标题 -->
-        <template #slotTitle="{index,row}">
-          {{ row.title }}
+        <!-- 博物馆名称 -->
+        <template #slotMuseumName="{index,row}">
+          {{ row.museumName }}
         </template>
-        <!-- 姓名 -->
-        <template #slotName="{index,row}">
-          {{ row.name }}
+        <!-- 公告标题 -->
+        <template #slotNoticeTitle="{index,row}">
+          {{ row.noticeTitle }}
+        </template>
+        <!-- 发布人 -->
+        <template #slotNoticeAuthor="{index,row}">
+          {{ row.noticeAuthor }}
         </template>
         <!-- 公告内容 -->
-        <template #slotcontent="{index,row}">
-          {{ row.content }}
+        <template #slotNoticeContent="{index,row}">
+          {{ row.noticeContent }}
         </template>
-        <template #slotTime="{index,row}">
-          {{ row.time }}
-        </template>
-        <!-- 公告是否公开 -->
-        <template #slotispublic="{index,row}">
-          <div v-if="row.ispublic === 0" style="color: #F56C6C;">不公开</div>
-          <div v-else-if="row.ispublic === 1" style="color: #67C23A;">公开</div>
+        <!-- 公告时间 -->
+        <template #slotNoticeTime="{index,row}">
+          {{ row.noticeTime }}
         </template>
         <!-- 操作 -->
-        <template #slotOperation="{index,row}">
-          <el-link v-show="row.title!=0" type="primary"
-            @click="router.push({name:'noticeCreateOrUpdate',query:{row:JSON.stringify(row)}})"
-            style="margin-right: 20px">编辑</el-link>
-          <el-link v-show="row.title!=0" type="danger" @click="deleteNotice(row,true)">删除</el-link>
-        </template>
+        <!-- 操作 -->
+      <template #slotOperation="{index,row}">
+        <el-link type="primary"
+          @click="router.push({name:'noticeCreateOrUpdate',query:{row:JSON.stringify(row)}})"
+          style="margin-right: 20px">编辑</el-link>
+        <el-link type="danger" @click="deleteNotice(row,true)">删除</el-link>
+      </template>
       </Table>
     </el-card>
   </template>
@@ -77,46 +89,46 @@
   };
   // 表单列
   const columns = [
-  {
-      label: "id",
-      prop: "notice_id",
+    {
+      label: "公告id",
+      prop: "noticeId",
       width: "100",
-      scopedSlots: "slotNotice_id",
+      scopedSlots: "slotNoticeId",
+      fixed: false
+    },
+    {
+      label: "博物馆名称",
+      prop: "museumName",
+      width: "100",
+      scopedSlots: "slotMuseumName",
       fixed: false
     },
     {
       label: "标题",
-      prop: "title",
+      prop: "noticeTitle",
       width: "200",
-      scopedSlots: "slotTitle",
+      scopedSlots: "slotNoticeTitle",
       fixed: false
     },
     {
       label: "发布人",
-      prop: "name",
+      prop: "noticeAuthor",
       width: "200",
-      scopedSlots: "slotName",
+      scopedSlots: "slotNoticeAuthor",
       fixed: false
     },
     {
       label: "公告内容",
-      prop: "content",
+      prop: "noticeContent",
       width: "350",
-      scopedSlots: "slotcontent",
+      scopedSlots: "slotNoticeContent",
       fixed: false
     },
     {
       label: "发布时间",
-      prop: "time",
+      prop: "noticeTime",
       width: "100",
-      scopedSlots: "slotTime",
-      fixed: false
-    },
-    {
-      label: "是否公开",
-      prop: "ispublic",
-      width: "150",
-      scopedSlots: "slotispublic",
+      scopedSlots: "slotNoticeTime",
       fixed: false
     },
     {
@@ -147,7 +159,7 @@ const loadDataList = async () => {
   Object.assign(tableData.value, result.data);
 };
 /**
- * 删除用户
+ * 删除公告
  */
 const deleteNotice = async (row,needConfirm=false)=>{
   if(needConfirm){
@@ -160,7 +172,7 @@ const deleteNotice = async (row,needConfirm=false)=>{
   let result = await proxy.Request.request({
     url: proxy.Api.deleteNotice,
     params: {
-      notice_id: row.notice_id
+      noticeId: row.noticeId
     }
   });
   if (!result) {

@@ -30,4 +30,12 @@ public interface MuseumMapper {
 
     @Delete("delete from museum where museum_id=#{museumId}")
     void delete(Long museumId);
+
+    /**
+     * 根据id查询是否存在
+     * @param museumId
+     * @return
+     */
+    @Select("select * from museum where museum_id=#{museumId} limit 1")
+    Museum existById(Long museumId);
 }

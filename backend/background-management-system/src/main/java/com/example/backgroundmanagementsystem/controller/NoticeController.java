@@ -37,7 +37,6 @@ public class NoticeController {
     @PageQueryAutoFill
     public ResponseVO<PageResultVO> loadNoticeList(NoticePageQueryDTO noticePageQueryDTO){
         PageResultVO ans = noticeService.loadNoticeList(noticePageQueryDTO);
-        System.out.println("\n ans is : "+ans);
         return ResponseUtils.success(ans);
     }
 
@@ -54,24 +53,12 @@ public class NoticeController {
 
     /**
      * 删除公告
-     * @param notice_id
+     * @param noticeId
      * @return
      */
     @PostMapping("/deleteNotice")
-    public ResponseVO deleteNotice(@NotNull Long notice_id){
-        noticeService.deleteNotice(notice_id);
+    public ResponseVO deleteNotice(@NotNull Long noticeId){
+        noticeService.deleteNotice(noticeId);
         return ResponseUtils.success();
-    }
-
-
-    @Autowired
-    private NoticeMapper nm;
-    @GetMapping("/test")
-    public List<NoticeVO> getall(){
-        ArrayList<NoticeVO> ans = new ArrayList<>(nm.findall());
-        for(int i = 0;i<ans.size();i++){
-            System.out.println(ans.get(i));
-        }
-        return nm.findall();
     }
 }

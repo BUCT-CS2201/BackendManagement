@@ -1,5 +1,10 @@
 package com.example.backgroundmanagementsystem.pojo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,28 +19,28 @@ public class Notice extends BaseEntity{
     /**
      * 公告id
      */
-    private Long notice_id;
+    private Long noticeId;
+    /**
+     * 博物馆id
+     */
+    @NotNull
+    private Long museumId;
     /**
      * 标题
      */
-
-    private String title;
+    @NotEmpty
+    private String noticeTitle;
     /**
-     * 发布人
+     * 作者
      */
-    private String name;
+    @NotEmpty
+    private String noticeAuthor;
     /**
      * 发布内容
      */
-
-    private String content;
+    private String noticeContent;
     /**
      * 发布时间
      */
-    private LocalDateTime time;
-    /**
-     * 公告状态，0不公开，1公开
-     */
-    private Integer ispublic;
-   
+    private LocalDateTime noticeTime;
 }
