@@ -12,5 +12,9 @@ const api={
     loadUserList: "/user/loadUserList", // 加载用户列表
     addOrUpdateUser: "/user/addOrUpdateUser", // 添加或修改用户
     deleteUser: "/user/deleteUser", // 删除用户
+    // 博物馆模块
+    loadMuseumList: "/museum/loadMuseumList", // 加载博物馆列表
+    addOrUpdateMuseum: "/museum/addOrUpdateMuseum", // 添加或修改博物馆
+    deleteMuseum: "/museum/deleteMuseum", // 删除博物馆
 }
 export default api;

@@ -38,6 +38,11 @@ const router = createRouter({
           component: () => import('@/views/user/UserCreateOrUpdate.vue'),
         },
         {
+          path: 'museumCreateOrUpdate',
+          name: 'museumCreateOrUpdate',
+          component: () => import('@/views/museum/MuseumCreateOrUpdate.vue'),
+        },
+        {
           path: 'review',
           name: 'review',
           component: () => import('@/views/review/ReviewManagement.vue'),
