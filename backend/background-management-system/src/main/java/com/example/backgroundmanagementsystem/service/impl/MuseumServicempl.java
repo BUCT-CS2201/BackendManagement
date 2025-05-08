@@ -3,6 +3,7 @@ package com.example.backgroundmanagementsystem.service.impl;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
 import com.example.backgroundmanagementsystem.mapper.MuseumMapper;
+import com.example.backgroundmanagementsystem.mapper.NoticeMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.MuseumPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Museum;
 import com.example.backgroundmanagementsystem.pojo.vo.MuseumVO;
@@ -13,12 +14,14 @@ import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class MuseumServicempl implements MuseumService {
     private final MuseumMapper museumMapper;
+    private final NoticeMapper noticeMapper;
     /**
      * 博物馆分页查询
      * @param museumPageQueryDTO
@@ -65,8 +68,11 @@ public class MuseumServicempl implements MuseumService {
      * @param museumId
      */
     @Override
+    @Transactional
     public void deleteMuseum(Long museumId) {
         log.info("删除博物馆：{}",museumId);
+        // 删除关联的公告
+        noticeMapper.deleteByMuseumId(museumId);
         museumMapper.delete(museumId);
     }
 }
