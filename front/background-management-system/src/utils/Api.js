@@ -16,5 +16,9 @@ const api={
     loadNoticeList: "/notice/loadNoticeList", // 加载公告列表
     addOrUpdateNotice: "/notice/addOrUpdateNotice", // 添加公告
     deleteNotice: "/notice/deleteNotice", // 删除公告
+    // 博物馆模块
+    loadMuseumList: "/museum/loadMuseumList", // 加载博物馆列表
+    addOrUpdateMuseum: "/museum/addOrUpdateMuseum", // 添加或修改博物馆
+    deleteMuseum: "/museum/deleteMuseum", // 删除博物馆
 }
 export default api;
