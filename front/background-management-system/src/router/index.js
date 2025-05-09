@@ -43,9 +43,19 @@ const router = createRouter({
           component: () => import('@/views/museum/MuseumCreateOrUpdate.vue'),
         },
         {
-          path: 'review',
-          name: 'review',
-          component: () => import('@/views/review/ReviewManagement.vue'),
+          path: 'commentReview',
+          name: 'commentReview',
+          component: () => import('@/views/review/CommentReviewManagement.vue'),
+        },
+        {
+          path: 'imageReview',
+          name: 'imageReview',
+          component: () => import('@/views/review/ImageReviewManagement.vue'),
+        },
+        {
+          path: 'videoReview',
+          name: 'videoReview',
+          component: () => import('@/views/review/VideoReviewManagement.vue'),
         },
         {
           path: 'museum',

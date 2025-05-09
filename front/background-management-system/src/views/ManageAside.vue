@@ -7,12 +7,34 @@
                 </el-icon>
                 <span style="margin-left: 13px;">用户管理</span>
             </el-menu-item>
-            <el-menu-item index="/manage/review">
-                <el-icon style="color:#0483d4;margin-left: 8px;">
-                    <Unlock style="width: 100px;height: 50px;" />
-                </el-icon>
-                <span style="margin-left: 13px;">审核管理</span>
-            </el-menu-item>
+
+            <el-sub-menu>
+                <template #title>
+                    <el-icon style="color:#0483d4;margin-left: 8px;">
+                        <View style="width: 100px;height: 50px;" />
+                    </el-icon>
+                    <span  style="margin-left: 13px; font-size: 18px; color: #0483d4;">审核管理</span>
+                </template>
+
+                <el-menu-item index="/manage/commentReview">
+                    <el-icon style="color:#0483d4;margin-left: 8px;">
+                        <ChatDotSquare style="width: 20px; height: 20px;" />
+                    </el-icon>
+                    <span style="margin-left: 8px;">评论审核</span>
+                </el-menu-item>
+                <el-menu-item index="/manage/imageReview">
+                    <el-icon style="color:#0483d4;margin-left: 8px;">
+                        <Picture style="width: 20px; height: 20px;" />
+                    </el-icon>
+                    <span style="margin-left: 8px;">图片审核</span>
+                </el-menu-item> 
+                <el-menu-item index="/manage/videoReview">
+                    <el-icon style="color:#0483d4;margin-left: 8px;">
+                        <VideoPlay style="width: 20px; height: 20px;" />
+                    </el-icon>
+                    <span style="margin-left: 8px;">视频审核</span>
+                </el-menu-item>
+            </el-sub-menu>
             
             <el-sub-menu>
                 <template #title>

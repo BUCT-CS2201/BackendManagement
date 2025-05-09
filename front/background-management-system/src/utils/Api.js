@@ -20,5 +20,8 @@ const api={
     loadMuseumList: "/museum/loadMuseumList", // 加载博物馆列表
     addOrUpdateMuseum: "/museum/addOrUpdateMuseum", // 添加或修改博物馆
     deleteMuseum: "/museum/deleteMuseum", // 删除博物馆
+    // 评论模块
+    loadCommentList: "/comment/loadCommentList", // 加载评论列表
+    updateCommentStatus: "/comment/updateCommentStatus", // 更新评论状态
 }
 export default api;

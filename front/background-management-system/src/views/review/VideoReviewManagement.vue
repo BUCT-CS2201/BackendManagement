@@ -1,6 +1,6 @@
 <template>
     <div>
-        审核管理
+        视频审核
     </div>
 </template>
 
