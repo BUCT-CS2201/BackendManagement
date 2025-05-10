@@ -12,5 +12,9 @@ const api={
     loadUserList: "/user/loadUserList", // 加载用户列表
     addOrUpdateUser: "/user/addOrUpdateUser", // 添加或修改用户
     deleteUser: "/user/deleteUser", // 删除用户
+    // 藏品信息模块
+    loadRelicList: "/relic/loadRelicList", // 加载文物列表
+    addOrUpdateRelic: "/relic/addOrUpdateRelic", // 添加或修改文物
+    deleteRelic: "/relic/deleteRelic", // 删除文物
 }
 export default api;
