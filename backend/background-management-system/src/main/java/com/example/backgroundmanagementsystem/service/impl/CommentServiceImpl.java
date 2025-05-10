@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -39,17 +40,34 @@ public class CommentServiceImpl implements CommentService {
      * 修改评论状态
      * @param commentId
      * @param status
+     * @param parentId
      */
     @Override
-    public void updateCommentStatus(Long commentId, Integer status) {
+    @Transactional
+    public void updateCommentStatus(Long commentId, Integer status,Long parentId) {
+        log.info("修改评论状态：commentId={}，status={}，parentId={}",commentId,status,parentId);
         // 状态校验
         if(!ArrayUtils.contains(
                 new int[]{ReviewStatusEnum.PENDING.getStatus(), ReviewStatusEnum.APPROVED.getStatus(), ReviewStatusEnum.REJECTED.getStatus()}, status)){
             throw new BaseException(ResponseCodeEnum.CODE_600);
         }
+        // 审核子评论，必须先父评论过审
+        if(parentId!=null){
+            // 父评论
+            Comment parentComment = commentMapper.findByCommentId(parentId);
+            if(!ReviewStatusEnum.APPROVED.getStatus().equals(parentComment.getStatus())
+                && ReviewStatusEnum.APPROVED.getStatus().equals(status)
+            ){
+                throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"父评论未过审");
+            }
+        }
+        // 修改评论审核状态
         Comment comment = new Comment();
         comment.setCommentId(commentId);
         comment.setStatus(status);
-        commentMapper.updateStatusById(comment);
+        commentMapper.updateStatusByCommentId(comment);
+        // 父评论状态修改，子评论同态
+        comment.setParentId(commentId);
+        commentMapper.updateStatusByParentId(comment);
     }
 }

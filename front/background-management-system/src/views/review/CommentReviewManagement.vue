@@ -86,7 +86,7 @@
             </template>
             <!-- 操作 -->
             <template #slotOperation="{ index, row }">
-                <el-dropdown @command="(status) => updateCommentStatus(row.commentId, status)">
+                <el-dropdown @command="(status) => updateCommentStatus(row.commentId,status,row.parentId,)">
                     <el-link type="primary">修改评论状态</el-link>
                     <template #dropdown>
                         <el-dropdown-menu>
@@ -213,12 +213,13 @@ const loadDataList = async () => {
 /**
  * 修改评论状态
  */
-const updateCommentStatus = async(commentId, status)=> {
+const updateCommentStatus = async(commentId, status,parentId)=> {
     let result = await proxy.Request.request({
         url: proxy.Api.updateCommentStatus,
         params: {
             commentId: commentId,
-            status: status
+            status: status,
+            parentId: parentId,
         }
     });
     if (!result) {

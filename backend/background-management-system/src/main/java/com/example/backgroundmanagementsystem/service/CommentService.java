@@ -15,6 +15,7 @@ public interface CommentService {
      * 修改评论状态
      * @param commentId
      * @param status
+     * @param parentId
      */
-    void updateCommentStatus(Long commentId, Integer status);
+    void updateCommentStatus(Long commentId, Integer status,Long parentId);
 }

@@ -38,8 +38,8 @@ public class CommentController {
      * @return
      */
     @PostMapping("/updateCommentStatus")
-    public ResponseVO updateCommentStatus(@NotNull Long commentId,@NotNull Integer status){
-        commentService.updateCommentStatus(commentId,status);
+    public ResponseVO updateCommentStatus(@NotNull Long commentId,@NotNull Integer status,Long parentId){
+        commentService.updateCommentStatus(commentId,status,parentId);
         return ResponseUtils.success();
     }
 }
