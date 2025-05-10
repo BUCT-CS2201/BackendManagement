@@ -2,10 +2,12 @@ package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
 import com.example.backgroundmanagementsystem.pojo.dto.CommentPageQueryDTO;
+import com.example.backgroundmanagementsystem.pojo.dto.CommentStatusUpdateDTO;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
 import com.example.backgroundmanagementsystem.service.CommentService;
 import com.example.backgroundmanagementsystem.utils.ResponseUtils;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -33,13 +35,12 @@ public class CommentController {
 
     /**
      * 修改评论状态
-     * @param commentId
-     * @param status
+     * @param commentStatusUpdateDTO
      * @return
      */
     @PostMapping("/updateCommentStatus")
-    public ResponseVO updateCommentStatus(@NotNull Long commentId,@NotNull Integer status,Long parentId){
-        commentService.updateCommentStatus(commentId,status,parentId);
+    public ResponseVO updateCommentStatus(@Valid CommentStatusUpdateDTO commentStatusUpdateDTO){
+        commentService.updateCommentStatus(commentStatusUpdateDTO);
         return ResponseUtils.success();
     }
 }

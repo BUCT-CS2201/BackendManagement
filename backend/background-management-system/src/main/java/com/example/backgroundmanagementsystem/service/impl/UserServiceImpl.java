@@ -2,6 +2,7 @@ package com.example.backgroundmanagementsystem.service.impl;
 
 import com.example.backgroundmanagementsystem.enums.OperationTypeEnum;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
+import com.example.backgroundmanagementsystem.enums.UserCommentStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
 import com.example.backgroundmanagementsystem.mapper.UserMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
@@ -14,6 +15,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -87,5 +89,17 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         log.info("删除用户：{}",userId);
         userMapper.delete(userId);
+    }
+
+    @Override
+    public void updateUserCommentStatus(Long userId, Integer commentStatus) {
+        log.info("修改用户评论状态：userId={}，commentStatus={}",userId,commentStatus);
+        if(!ArrayUtils.contains(new int[]{UserCommentStatusEnum.ENABLE.getStatus(), UserCommentStatusEnum.DISABLE.getStatus()}, commentStatus)){
+            throw new BaseException(ResponseCodeEnum.CODE_600);
+        }
+        User user = new User();
+        user.setUserId(userId);
+        user.setCommentStatus(commentStatus);
+        userMapper.update(user);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.service;
 
 import com.example.backgroundmanagementsystem.pojo.dto.CommentPageQueryDTO;
+import com.example.backgroundmanagementsystem.pojo.dto.CommentStatusUpdateDTO;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 
 public interface CommentService {
@@ -13,9 +14,7 @@ public interface CommentService {
 
     /**
      * 修改评论状态
-     * @param commentId
-     * @param status
-     * @param parentId
+     * @param commentStatusUpdateDTO
      */
-    void updateCommentStatus(Long commentId, Integer status,Long parentId);
+    void updateCommentStatus(CommentStatusUpdateDTO commentStatusUpdateDTO);
 }

@@ -86,13 +86,22 @@
             </template>
             <!-- 操作 -->
             <template #slotOperation="{ index, row }">
-                <el-dropdown @command="(status) => updateCommentStatus(row.commentId,status,row.parentId,)">
-                    <el-link type="primary">修改评论状态</el-link>
+                <el-dropdown @command="(status) => updateCommentStatus(row.commentId,status,row.parentId,row.userId)">
+                    <el-link style="color: #409EFF">修改评论状态</el-link>
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="0">审核中</el-dropdown-item>
                             <el-dropdown-item command="1">已过审</el-dropdown-item>
                             <el-dropdown-item command="2">未过审</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+                <el-dropdown @command="(commentStatus) => updateUserCommentStatus(row.userId,commentStatus)">
+                    <el-link style="color: #E6A23C">修改用户评论状态</el-link>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item command="0">禁止评论</el-dropdown-item>
+                            <el-dropdown-item command="1">允许评论</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -213,13 +222,14 @@ const loadDataList = async () => {
 /**
  * 修改评论状态
  */
-const updateCommentStatus = async(commentId, status,parentId)=> {
+const updateCommentStatus = async(commentId, status,parentId,userId)=> {
     let result = await proxy.Request.request({
         url: proxy.Api.updateCommentStatus,
         params: {
             commentId: commentId,
             status: status,
             parentId: parentId,
+            userId:userId
         }
     });
     if (!result) {
@@ -227,6 +237,22 @@ const updateCommentStatus = async(commentId, status,parentId)=> {
     }
     proxy.Message.success("修改成功");
     loadDataList(); 
+}
+/**
+ * 修改用户评论状态
+ */
+ const updateUserCommentStatus = async(userId, commentStatus)=> {
+    let result = await proxy.Request.request({
+        url: proxy.Api.updateUserCommentStatus,
+        params: {
+            userId: userId,
+            commentStatus: commentStatus,
+        }
+    });
+    if (!result) {
+        return;
+    }
+    proxy.Message.success("修改成功");
 }
 /**
  * 清空查询条件

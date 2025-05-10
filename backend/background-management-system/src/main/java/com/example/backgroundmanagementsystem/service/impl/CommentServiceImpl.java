@@ -2,10 +2,14 @@ package com.example.backgroundmanagementsystem.service.impl;
 
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.enums.ReviewStatusEnum;
+import com.example.backgroundmanagementsystem.enums.UserCommentStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
 import com.example.backgroundmanagementsystem.mapper.CommentMapper;
+import com.example.backgroundmanagementsystem.mapper.UserMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.CommentPageQueryDTO;
+import com.example.backgroundmanagementsystem.pojo.dto.CommentStatusUpdateDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Comment;
+import com.example.backgroundmanagementsystem.pojo.entity.User;
 import com.example.backgroundmanagementsystem.pojo.vo.CommentVO;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 import com.example.backgroundmanagementsystem.service.CommentService;
@@ -22,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
+    private final UserMapper userMapper;
 
     /**
      * 加载评论列表
@@ -38,14 +43,16 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * 修改评论状态
-     * @param commentId
-     * @param status
-     * @param parentId
+     * @param commentStatusUpdateDTO
      */
     @Override
     @Transactional
-    public void updateCommentStatus(Long commentId, Integer status,Long parentId) {
-        log.info("修改评论状态：commentId={}，status={}，parentId={}",commentId,status,parentId);
+    public void updateCommentStatus(CommentStatusUpdateDTO commentStatusUpdateDTO) {
+        log.info("修改评论状态：{}",commentStatusUpdateDTO);
+        Long commentId = commentStatusUpdateDTO.getCommentId();
+        Long parentId = commentStatusUpdateDTO.getParentId();
+        Long userId = commentStatusUpdateDTO.getUserId();
+        Integer status = commentStatusUpdateDTO.getStatus();
         // 状态校验
         if(!ArrayUtils.contains(
                 new int[]{ReviewStatusEnum.PENDING.getStatus(), ReviewStatusEnum.APPROVED.getStatus(), ReviewStatusEnum.REJECTED.getStatus()}, status)){
@@ -60,6 +67,11 @@ public class CommentServiceImpl implements CommentService {
             ){
                 throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"父评论未过审");
             }
+        }
+        // 过审评论，用户必须处于可以评论的状态
+        User user = userMapper.findByUserId(userId);
+        if(ReviewStatusEnum.APPROVED.getStatus().equals(status) && UserCommentStatusEnum.DISABLE.getStatus().equals(user.getCommentStatus())){
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"该用户已被禁止评论");
         }
         // 修改评论审核状态
         Comment comment = new Comment();

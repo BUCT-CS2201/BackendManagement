@@ -5,14 +5,15 @@ import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
-import com.example.backgroundmanagementsystem.pojo.vo.UserVO;
 import com.example.backgroundmanagementsystem.service.UserService;
 import com.example.backgroundmanagementsystem.utils.ResponseUtils;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -51,6 +52,18 @@ public class UserController {
     @PostMapping("/deleteUser")
     public ResponseVO deleteUser(@NotNull Long userId){
         userService.deleteUser(userId);
+        return ResponseUtils.success();
+    }
+
+    /**
+     * 修改用户评论状态
+     * @param userId
+     * @param commentStatus
+     * @return
+     */
+    @PostMapping("/updateUserCommentStatus")
+    public ResponseVO updateUserCommentStatus(@NotNull Long userId,@NotNull Integer commentStatus){
+        userService.updateUserCommentStatus(userId,commentStatus);
         return ResponseUtils.success();
     }
 }
