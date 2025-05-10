@@ -24,4 +24,11 @@ public interface UserService {
      * @param userId
      */
     void deleteUser(Long userId);
+
+    /**
+     * 修改用户评论状态
+     * @param userId
+     * @param commentStatus
+     */
+    void updateUserCommentStatus(Long userId, Integer commentStatus);
 }

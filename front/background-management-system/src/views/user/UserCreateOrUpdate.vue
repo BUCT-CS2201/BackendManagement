@@ -1,5 +1,5 @@
 <template>
-   <div style="display: flex;background-color: rgb(221.7, 222.6, 224.4); width: 100%; height: 350px">
+   <div style="display: flex;background-color: rgb(221.7, 222.6, 224.4); width: 100%; height: 380px">
       <el-form ref="dataFormRef" :model="dataForm" label-width="80px" style="margin-top: 25px;width: 800px" :rules="rules">
          <el-form-item label="电话号码" prop="phoneNumber">
          <el-input v-model="dataForm.phoneNumber" placeholder="请输入电话号码"/>
