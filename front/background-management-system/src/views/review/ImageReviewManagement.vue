@@ -72,7 +72,7 @@
             <!-- 操作 -->
             <template #slotOperation="{ index, row }">
                 <el-dropdown @command="(status) => updateImageStatus(row.imageId,row.commentId,status)">
-                    <el-link style="color: #409EFF">修改评论状态</el-link>
+                    <el-link style="color: #409EFF">修改图片状态</el-link>
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="0">审核中</el-dropdown-item>
@@ -180,8 +180,10 @@ const loadDataList = async () => {
 /**
  * 加载图片URL
  */
-const loadImageURL = async(imageId,imageSuffix)=>{
-    return proxy.Api.devDomain+proxy.Api.loadImageBaseURL+"?imageName="+imageId+imageSuffix;
+const loadImageURL = (imageId,imageSuffix)=>{
+    var url =  proxy.Api.devDomain+proxy.Api.loadImageBaseURL+"?imageName="+imageId+imageSuffix;
+    console.log("url:"+url)
+    return url
 }
 /**
  * 修改图片状态

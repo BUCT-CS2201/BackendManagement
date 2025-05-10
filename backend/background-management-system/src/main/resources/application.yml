@@ -68,6 +68,8 @@ mybatis:
 service:
   # 新建用户默认密码
   default-password: ${cultural-relics.service.default-password}
+  # 图片目录路径
+  image-folder: ${cultural-relics.service.image-folder}
   # 数据库备份配置信息
   database:
     # 默认文件夹

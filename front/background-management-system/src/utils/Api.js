@@ -27,6 +27,6 @@ const api={
     // 图片模块
     loadImageList: "/image/loadImageList", // 加载图片列表
     updateImageStatus: "/image/updateImageStatus", // 更新图片状态
-    loadImageBaseURL: "/image/loadImage", // 加载图片的baseURL
+    loadImageBaseURL: "/api/image/loadImage", // 加载图片的baseURL
 }
 export default api;
