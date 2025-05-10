@@ -19,10 +19,18 @@ public interface ImageMapper {
     Page<UserImageVO> findBatch(UserImagePageQueryDTO userImagePageQueryDTO);
 
     /**
-     * 修改图片状态
+     * 根据imageId修改图片状态
      * @param userImage
      */
     @Update("update user_image set status=#{status},update_time=#{updateTime} where image_id=#{imageId}")
     @AutoFill(OperationTypeEnum.UPDATE)
     void updateStatusByImageId(UserImage userImage);
+
+    /**
+     * 根据commentId修改图片状态
+     * @param userImage
+     */
+    @Update("update user_image set status=#{status},update_time=#{updateTime} where comment_id=#{commentId}")
+    @AutoFill(OperationTypeEnum.UPDATE)
+    void updateStatusByCommentId(UserImage userImage);
 }
