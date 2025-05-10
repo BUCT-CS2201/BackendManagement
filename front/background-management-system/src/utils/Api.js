@@ -24,5 +24,9 @@ const api={
     // 评论模块
     loadCommentList: "/comment/loadCommentList", // 加载评论列表
     updateCommentStatus: "/comment/updateCommentStatus", // 更新评论状态
+    // 图片模块
+    loadImageList: "/image/loadImageList", // 加载图片列表
+    updateImageStatus: "/image/updateImageStatus", // 更新图片状态
+    loadImageBaseURL: "/image/loadImage", // 加载图片的baseURL
 }
 export default api;
