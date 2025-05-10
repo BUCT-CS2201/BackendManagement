@@ -1,6 +1,6 @@
 <template>
     <el-aside>
-        <el-menu router>
+        <el-menu router :unique-opened="true">
             <el-menu-item index="/manage/user">
                 <el-icon style="color:#0483d4;margin-left: 8px;">
                     <User style="width: 100px;height: 50px;" />
@@ -8,7 +8,7 @@
                 <span style="margin-left: 13px;">用户管理</span>
             </el-menu-item>
 
-            <el-sub-menu>
+            <el-sub-menu index="ReviewManagement">
                 <template #title>
                     <el-icon style="color:#0483d4;margin-left: 8px;">
                         <View style="width: 100px;height: 50px;" />
@@ -36,7 +36,7 @@
                 </el-menu-item>
             </el-sub-menu>
             
-            <el-sub-menu>
+            <el-sub-menu index="DataManagement">
                 <template #title>
                     <el-icon style="color:#0483d4;margin-left: 8px;">
                         <Refresh style="width: 100px;height: 50px;" />
