@@ -101,6 +101,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/account/login")
                 .excludePathPatterns("/account/getCheckCode")
                 .excludePathPatterns("/account/submitCheckCode")
-                .excludePathPatterns("/account/forgetAndChangePassword");
+                .excludePathPatterns("/account/forgetAndChangePassword")
+                .excludePathPatterns("/image/loadImage");
     }
 }

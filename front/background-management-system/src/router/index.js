@@ -38,9 +38,24 @@ const router = createRouter({
           component: () => import('@/views/user/UserCreateOrUpdate.vue'),
         },
         {
-          path: 'review',
-          name: 'review',
-          component: () => import('@/views/review/ReviewManagement.vue'),
+          path: 'museumCreateOrUpdate',
+          name: 'museumCreateOrUpdate',
+          component: () => import('@/views/museum/MuseumCreateOrUpdate.vue'),
+        },
+        {
+          path: 'commentReview',
+          name: 'commentReview',
+          component: () => import('@/views/review/CommentReviewManagement.vue'),
+        },
+        {
+          path: 'imageReview',
+          name: 'imageReview',
+          component: () => import('@/views/review/ImageReviewManagement.vue'),
+        },
+        {
+          path: 'videoReview',
+          name: 'videoReview',
+          component: () => import('@/views/review/VideoReviewManagement.vue'),
         },
         {
           path: 'museum',
@@ -61,6 +76,11 @@ const router = createRouter({
           path: 'notice',
           name: 'notice',
           component: () => import('@/views/notice/NoticeManagement.vue'),
+        },
+        {
+          path: 'noticeCreateOrUpdate',
+          name: 'noticeCreateOrUpdate',
+          component: () => import('@/views/notice/NoticeCreateOrUpdate.vue'),
         },
         {
           path: 'database',

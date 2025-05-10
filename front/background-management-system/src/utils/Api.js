@@ -12,5 +12,21 @@ const api={
     loadUserList: "/user/loadUserList", // 加载用户列表
     addOrUpdateUser: "/user/addOrUpdateUser", // 添加或修改用户
     deleteUser: "/user/deleteUser", // 删除用户
+    updateUserCommentStatus: "/user/updateUserCommentStatus", // 修改用户评论状态
+    // 公告模块
+    loadNoticeList: "/notice/loadNoticeList", // 加载公告列表
+    addOrUpdateNotice: "/notice/addOrUpdateNotice", // 添加公告
+    deleteNotice: "/notice/deleteNotice", // 删除公告
+    // 博物馆模块
+    loadMuseumList: "/museum/loadMuseumList", // 加载博物馆列表
+    addOrUpdateMuseum: "/museum/addOrUpdateMuseum", // 添加或修改博物馆
+    deleteMuseum: "/museum/deleteMuseum", // 删除博物馆
+    // 评论模块
+    loadCommentList: "/comment/loadCommentList", // 加载评论列表
+    updateCommentStatus: "/comment/updateCommentStatus", // 更新评论状态
+    // 图片模块
+    loadImageList: "/image/loadImageList", // 加载图片列表
+    updateImageStatus: "/image/updateImageStatus", // 更新图片状态
+    loadImageBaseURL: "/api/image/loadImage", // 加载图片的baseURL
 }
 export default api;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.backgroundmanagementsystem.mapper.MuseumMapper">
+    <!-- 新增博物馆信息 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="museumId" keyColumn="museum_id">
+        insert into museum(museum_name, description, address, website_url, booking_url, create_time,update_time)
+        VALUES
+        (#{museumName}, #{description}, #{address}, #{websiteUrl}, #{bookingUrl},#{createTime},#{updateTime})
+    </insert>
+    <!-- 修改博物馆信息 -->
+    <update id="update">
+        update museum
+        <set>
+            <if test="museumName != null">museum_name = #{museumName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="websiteUrl != null">website_url = #{websiteUrl},</if>
+            <if test="bookingUrl != null">booking_url = #{bookingUrl},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where museum_id = #{museumId}
+    </update>
+    <!-- 批量查询博物馆信息 -->
+    <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.MuseumVO">
+        select * from museum
+        <where>
+            <if test="museumId != null">and museum_id = #{museumId}</if>
+            <if test="museumName != null">and museum_name like concat('%', #{museumName}, '%')</if>
+        </where>
+        order by museum_id asc
+    </select>
+</mapper>

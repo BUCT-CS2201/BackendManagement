@@ -7,9 +7,13 @@ public enum OperationTypeEnum {
     /**
      * 插入
      */
-    INSERT,
+    UPDATE,
     /**
      * 删除
      */
-    UPDATE;
+    DELETE,
+    /**
+     * 新增
+     */
+    INSERT;
 }
