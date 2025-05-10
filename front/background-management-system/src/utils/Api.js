@@ -12,5 +12,10 @@ const api={
     loadUserList: "/user/loadUserList", // 加载用户列表
     addOrUpdateUser: "/user/addOrUpdateUser", // 添加或修改用户
     deleteUser: "/user/deleteUser", // 删除用户
+
+    // 日志模块 ✅
+    loadLogList: "/log/loadLogList", // 查询日志列表
+    deleteLog:"/log/deleteLog", // 删除日志
+    addLog:"/log/addLog", // 增加日志
 }
 export default api;

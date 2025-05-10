@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.backgroundmanagementsystem.mapper.AdminLogMapper">
+
+    <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.AdminLogVO">
+        SELECT
+            log_id,
+            admin_name,
+            operation,
+            operation_time
+        FROM
+            admin_log
+        <where>
+            <if test="adminName != null and adminName != ''">
+                AND admin_name LIKE CONCAT('%', #{adminName}, '%')
+            </if>
+            <if test="operationTimeStart != null and operationTimeStart != ''">
+                AND operation_time &gt; #{operationTimeStart}
+            </if>
+            <if test="operationTimeEnd != null and operationTimeEnd != ''">
+                AND operation_time &lt; #{operationTimeEnd}
+            </if>
+        </where>
+        ORDER BY operation_time DESC
+    </select>
+
+</mapper>
