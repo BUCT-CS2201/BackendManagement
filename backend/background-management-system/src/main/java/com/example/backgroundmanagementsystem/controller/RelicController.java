@@ -5,14 +5,15 @@ import com.example.backgroundmanagementsystem.pojo.dto.RelicPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Relic;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
-import com.example.backgroundmanagementsystem.pojo.vo.RelicVO;
 import com.example.backgroundmanagementsystem.service.RelicService;
 import com.example.backgroundmanagementsystem.utils.ResponseUtils;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,12 +35,12 @@ public class RelicController {
 
     /**
      * 添加或修改用户
-     * @param relic
+     * @param cultural_relic
      * @return
      */
     @PostMapping("/addOrUpdateRelic")
-    public ResponseVO addOrUpdateRelic(@Valid Relic relic){
-        relicService.addOrUpdateRelic(relic);
+    public ResponseVO addOrUpdateRelic(@Valid Relic cultural_relic){
+        relicService.addOrUpdateRelic(cultural_relic);
         return ResponseUtils.success();
     }
 

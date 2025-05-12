@@ -12,7 +12,7 @@ public class RelicPageQueryDTO extends PageDTO{
     private Long museumId;
     private String name;
     private String type;
-    private String materials;
+    private String matrials;
     private String dynasty;
     private String author;
     private Integer entryTime;

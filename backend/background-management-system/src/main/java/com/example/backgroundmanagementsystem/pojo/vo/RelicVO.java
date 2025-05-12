@@ -39,7 +39,7 @@ public class RelicVO {
     /**
      * 文物材质
      */
-    private String materials;
+    private String matrials;
     /**
      * 文物年代
      */

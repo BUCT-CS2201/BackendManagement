@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface RelicMapper {
@@ -16,8 +17,8 @@ public interface RelicMapper {
     @AutoFill(OperationTypeEnum.INSERT)
     void insert(Relic cultural_relic);
 
-    @Select("select * from cultural_relic where relic_id=#{relicId}")
-    Relic findByRelicId(Long relicId);
+    @Select("select * from cultural_relic where name=#{name}")
+    Relic findByName(String name);
 
     @AutoFill(OperationTypeEnum.UPDATE)
     void update(Relic relicFoUpdate);

@@ -4,26 +4,28 @@
 <mapper namespace="com.example.backgroundmanagementsystem.mapper.RelicMapper">
     <!--新增-->
     <insert id="insert">
-        insert into cultural_relic(museum_id, name, type, description, size, matrials, dynasty, likes_count, views_count, author, create_time,update_time)
+        insert into cultural_relic(museum_id, name, type, description, size, matrials, dynasty, likes_count, views_count, author, create_time,update_time,entry_time)
         VALUES
-            (#{museumId},#{name},#{type},#{description},#{size},#{materials},#{dynasty},#{likesCount},#{viewsCount},#{author},#{createTime},#{updateTime})
+            (#{museumId},#{name},#{type},#{description},#{size},#{matrials},#{dynasty},#{likesCount},#{viewsCount},#{author},#{createTime},#{updateTime},#{entryTime})
     </insert>
     <!--修改-->
     <update id="update">
         update cultural_relic
         <set>
-            <if test="museumId!=null">museum_id=#{museumId},</if>
             <if test="name!=null">name=#{name},</if>
             <if test="type!=null">type=#{type},</if>
             <if test="description!=null">description=#{description},</if>
             <if test="size!=null">size=#{size},</if>
             <if test="dynasty!=null">dynasty=#{dynasty},</if>
-            <if test="materials!=null">matrials=#{materials},</if>
+            <if test="matrials!=null">matrials=#{matrials},</if>
             <if test="likesCount!=null">likes_count=#{likesCount},</if>
+            <!--<if test="likesCount == null">likes_count=0,</if>-->
             <if test="viewsCount!=null">views_count=#{viewsCount},</if>
+            <!--<if test="viewsCount == null">views_count=0,</if>-->
             <if test="author!=null">author=#{author},</if>
             <if test="createTime!=null">create_time=#{createTime},</if>
             <if test="updateTime!=null">update_time=#{updateTime},</if>
+            <if test="entryTime!=null">entry_time=#{entryTime},</if>
         </set>
         where relic_id=#{relicId}
     </update>

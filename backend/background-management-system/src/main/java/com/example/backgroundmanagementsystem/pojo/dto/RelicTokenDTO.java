@@ -1,7 +1,6 @@
-package com.example.backgroundmanagementsystem.pojo.entity;
+package com.example.backgroundmanagementsystem.pojo.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Relic extends BaseEntity{
+public class RelicTokenDTO {
     /**
      * 文物id
      */
@@ -25,7 +24,6 @@ public class Relic extends BaseEntity{
     /**
      * 文物种类
      */
-    @NotEmpty
     private String type;
     /**
      * 文物描述
@@ -59,4 +57,8 @@ public class Relic extends BaseEntity{
      * 文物入库时间
      */
     private Integer entryTime;
+    /**
+     * token
+     */
+    private String token;
 }
