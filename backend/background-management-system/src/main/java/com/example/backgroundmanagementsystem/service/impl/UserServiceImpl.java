@@ -18,7 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.logging.LogManager;
 
@@ -48,6 +50,7 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
+    @Transactional // 事务
     public void addOrUpdateUser(User user) {
         log.info("新增或修改用户{}",user);
         User existPhoneNumber = userMapper.findByPhoneNumber(user.getPhoneNumber());
@@ -78,6 +81,7 @@ public class UserServiceImpl implements UserService {
             }
             // 修改
             userMapper.update(user);
+            // logMapper.xxinsert()
         }
     }
 
