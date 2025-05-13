@@ -29,5 +29,13 @@ const api={
     // 评论模块
     loadCommentList: "/comment/loadCommentList", // 加载评论列表
     updateCommentStatus: "/comment/updateCommentStatus", // 更新评论状态
+    // 图片模块
+    loadImageList: "/image/loadImageList", // 加载图片列表
+    updateImageStatus: "/image/updateImageStatus", // 更新图片状态
+    loadImageBaseURL: "/api/image/loadImage", // 加载图片的baseURL
+    //藏品信息模块
+    loadRelicList: "/relic/loadRelicList", // 加载文物列表
+    addOrUpdateRelic: "/relic/addOrUpdateRelic", // 添加或修改文物
+    deleteRelic: "/relic/deleteRelic", // 删除文物
 }
 export default api;

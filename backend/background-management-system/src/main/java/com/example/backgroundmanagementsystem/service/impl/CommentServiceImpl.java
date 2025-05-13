@@ -5,11 +5,13 @@ import com.example.backgroundmanagementsystem.enums.ReviewStatusEnum;
 import com.example.backgroundmanagementsystem.enums.UserCommentStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
 import com.example.backgroundmanagementsystem.mapper.CommentMapper;
+import com.example.backgroundmanagementsystem.mapper.ImageMapper;
 import com.example.backgroundmanagementsystem.mapper.UserMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.CommentPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.dto.CommentStatusUpdateDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Comment;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
+import com.example.backgroundmanagementsystem.pojo.entity.UserImage;
 import com.example.backgroundmanagementsystem.pojo.vo.CommentVO;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 import com.example.backgroundmanagementsystem.service.CommentService;
@@ -27,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
     private final UserMapper userMapper;
+    private final ImageMapper imageMapper;
 
     /**
      * 加载评论列表
@@ -58,7 +61,7 @@ public class CommentServiceImpl implements CommentService {
                 new int[]{ReviewStatusEnum.PENDING.getStatus(), ReviewStatusEnum.APPROVED.getStatus(), ReviewStatusEnum.REJECTED.getStatus()}, status)){
             throw new BaseException(ResponseCodeEnum.CODE_600);
         }
-        // 审核子评论，必须先父评论过审
+        // 过审子评论，必须先过审父评论
         if(parentId!=null){
             // 父评论
             Comment parentComment = commentMapper.findByCommentId(parentId);
@@ -68,7 +71,7 @@ public class CommentServiceImpl implements CommentService {
                 throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"父评论未过审");
             }
         }
-        // 过审评论，用户必须处于可以评论的状态
+        // 过审评论，用户必须处于可评论的状态
         User user = userMapper.findByUserId(userId);
         if(ReviewStatusEnum.APPROVED.getStatus().equals(status) && UserCommentStatusEnum.DISABLE.getStatus().equals(user.getCommentStatus())){
             throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"该用户已被禁止评论");
@@ -78,8 +81,16 @@ public class CommentServiceImpl implements CommentService {
         comment.setCommentId(commentId);
         comment.setStatus(status);
         commentMapper.updateStatusByCommentId(comment);
-        // 父评论状态修改，子评论同态
-        comment.setParentId(commentId);
-        commentMapper.updateStatusByParentId(comment);
+        // 评论状态修改时，关联子评论和图片
+        if(!ReviewStatusEnum.APPROVED.getStatus().equals(status)){
+            // 父评论由过审改为未过审，则子评论全变为未过审
+            comment.setParentId(commentId);
+            commentMapper.updateStatusByParentId(comment);
+            // 评论由过审改为未过审，则其关联图片全变为未过审
+            UserImage userImage = new UserImage();
+            userImage.setCommentId(commentId);
+            userImage.setStatus(status);
+            imageMapper.updateStatusByCommentId(userImage);
+        }
     }
 }

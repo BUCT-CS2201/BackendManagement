@@ -92,6 +92,11 @@ const router = createRouter({
           name: 'database',
           component: () => import('@/views/database/DatabaseManagement.vue'),
         },
+        {
+          path: 'relicCreateOrUpdate',
+          name: 'relicCreateOrUpdate',
+          component: () => import('@/views/relic/RelicCreateOrUpdate.vue'),
+        },
       ]
     },
     {

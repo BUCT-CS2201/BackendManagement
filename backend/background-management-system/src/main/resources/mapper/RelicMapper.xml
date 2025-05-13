@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.backgroundmanagementsystem.mapper.RelicMapper">
+    <!--新增-->
+    <insert id="insert">
+        insert into cultural_relic(museum_id, name, type, description, size, matrials, dynasty, likes_count, views_count, author, create_time,update_time,entry_time)
+        VALUES
+            (#{museumId},#{name},#{type},#{description},#{size},#{matrials},#{dynasty},#{likesCount},#{viewsCount},#{author},#{createTime},#{updateTime},#{entryTime})
+    </insert>
+    <!--修改-->
+    <update id="update">
+        update cultural_relic
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="type!=null">type=#{type},</if>
+            <if test="description!=null">description=#{description},</if>
+            <if test="size!=null">size=#{size},</if>
+            <if test="dynasty!=null">dynasty=#{dynasty},</if>
+            <if test="matrials!=null">matrials=#{matrials},</if>
+            <if test="likesCount!=null">likes_count=#{likesCount},</if>
+            <!--<if test="likesCount == null">likes_count=0,</if>-->
+            <if test="viewsCount!=null">views_count=#{viewsCount},</if>
+            <!--<if test="viewsCount == null">views_count=0,</if>-->
+            <if test="author!=null">author=#{author},</if>
+            <if test="createTime!=null">create_time=#{createTime},</if>
+            <if test="updateTime!=null">update_time=#{updateTime},</if>
+            <if test="entryTime!=null">entry_time=#{entryTime},</if>
+        </set>
+        where relic_id=#{relicId}
+    </update>
+    <!--查询-->
+    <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.RelicVO">
+        select * from cultural_relic
+        <where>
+            <if test="name!=null">and name like concat('%',#{name},'%')</if>
+            <if test="relicId!=null">and relic_id=#{relicId}</if>
+            <if test="dynasty!=null">and dynasty like concat('%',#{dynasty},'%')</if>
+            <if test="type!=null">and type like concat('%',#{type},'%')</if>
+        </where>
+        order by relic_id asc
+    </select>
+</mapper>
