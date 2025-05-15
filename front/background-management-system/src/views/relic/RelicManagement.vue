@@ -151,20 +151,14 @@ export default {
 <script setup>
 import { ref, getCurrentInstance,onMounted } from "vue";
 import { useRouter } from "vue-router";
-<<<<<<< HEAD
 import { useUserInfoStore } from '@/stores/userInfoStore'
-=======
->>>>>>> 504bdae28a33f3cc77587b91386f7667af81d39e
 import Table from "@/components/Table.vue";
 
 const { proxy } = getCurrentInstance();
 // 路由
 const router = useRouter();
-<<<<<<< HEAD
 // 用户信息
 const userInfoStore = useUserInfoStore()
-=======
->>>>>>> 504bdae28a33f3cc77587b91386f7667af81d39e
 // 表单
 const tableData = ref({});
 // 表单样式
@@ -278,12 +272,8 @@ const deleteRelic = async (row,needConfirm=false)=>{
   let result = await proxy.Request.request({
     url: proxy.Api.deleteRelic,
     params: {
-<<<<<<< HEAD
       relicId: row.relicId,
       params.adminName = userInfoStore.userInfo.name
-=======
-      relicId: row.relicId
->>>>>>> 504bdae28a33f3cc77587b91386f7667af81d39e
     }
   });
   if (!result) {
