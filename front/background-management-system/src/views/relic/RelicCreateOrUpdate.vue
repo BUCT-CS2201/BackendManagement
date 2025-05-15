@@ -38,6 +38,7 @@
 <script setup>
 import { useRoute,useRouter} from 'vue-router';
 import {ref,reactive,onMounted,getCurrentInstance} from 'vue';
+<<<<<<< HEAD
 import { useUserInfoStore } from '@/stores/userInfoStore'
 const route = useRoute();
 const router = useRouter();
@@ -46,6 +47,13 @@ const proxy = getCurrentInstance().proxy;
 const userInfoStore = useUserInfoStore()
 const dataFormRef = ref(null);
 // 表单 
+=======
+const route = useRoute();
+const router = useRouter();
+const proxy = getCurrentInstance().proxy;
+const dataFormRef = ref(null);
+// 表单
+>>>>>>> 504bdae28a33f3cc77587b91386f7667af81d39e
 const dataForm = reactive({
   relicId: null,
   museumId: 1,
@@ -155,7 +163,10 @@ const onSubmit = ()=>{
           // 提交表单
           let params = {};
           Object.assign(params,dataForm);
+<<<<<<< HEAD
           params.adminName = userInfoStore.userInfo.name;
+=======
+>>>>>>> 504bdae28a33f3cc77587b91386f7667af81d39e
           // 确保 likesCount 和 viewsCount 存在且不为 0 时才传递，否则不包含在 params 中
           let result = await proxy.Request.request({
             url: proxy.Api.addOrUpdateRelic,
