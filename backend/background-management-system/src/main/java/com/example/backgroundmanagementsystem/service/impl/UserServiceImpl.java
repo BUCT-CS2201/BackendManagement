@@ -4,6 +4,7 @@ import com.example.backgroundmanagementsystem.enums.OperationTypeEnum;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.enums.UserCommentStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
+import com.example.backgroundmanagementsystem.mapper.AdminLogMapper;
 import com.example.backgroundmanagementsystem.mapper.UserMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Value("${service.default-password}")
     private String defaultPassword;
     private final UserMapper userMapper;
+    private final AdminLogMapper adminLogMapper;
     /**
      * 用户分页查询
      * @param userPageQueryDTO
@@ -51,7 +53,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional // 事务
-    public void addOrUpdateUser(User user) {
+    public void addOrUpdateUser(User user,String adminName) {
         log.info("新增或修改用户{}",user);
         User existPhoneNumber = userMapper.findByPhoneNumber(user.getPhoneNumber());
         User existIdNumber = userMapper.findByIdNumber(user.getIdNumber());
@@ -69,6 +71,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(defaultPassword);
             // 插入
             userMapper.insert(user);
+            adminLogMapper.addLog(adminName, "新增用户:"+user.getPhoneNumber());
         }else{
             // 修改
             // 要修改的电话号码被使用
@@ -81,6 +84,7 @@ public class UserServiceImpl implements UserService {
             }
             // 修改
             userMapper.update(user);
+            adminLogMapper.addLog(adminName, "修改用户信息:"+user.getUserId());
             // logMapper.xxinsert()
         }
     }
@@ -90,9 +94,11 @@ public class UserServiceImpl implements UserService {
      * @param userId
      */
     @Override
-    public void deleteUser(Long userId) {
+    @Transactional
+    public void deleteUser(Long userId,String adminName) {
         log.info("删除用户：{}",userId);
         userMapper.delete(userId);
+        adminLogMapper.addLog(adminName, "删除用户："+userId);
     }
 
     @Override

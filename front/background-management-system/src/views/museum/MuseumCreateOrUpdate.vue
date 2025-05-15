@@ -27,10 +27,13 @@
 <script setup>
    import { useRoute, useRouter } from 'vue-router';
    import { ref, reactive, onMounted, getCurrentInstance } from 'vue';
+   import { useUserInfoStore } from '@/stores/userInfoStore'
    const route = useRoute();
    const router = useRouter();
    const proxy = getCurrentInstance().proxy;
    const dataFormRef = ref(null);
+   // 用户信息
+   const userInfoStore = useUserInfoStore()
    // 判断是否为编辑状态
    const isEdit = ref(false);
 
@@ -82,6 +85,7 @@
                // 打印提交的数据，确保新增时 museumId 为 null 或未传递
                console.log('提交的博物馆数据:', dataForm);
                let params = { ...dataForm };
+               params.adminName = userInfoStore.userInfo.name;
                if (!isEdit.value) {
                   // 新增时确保 museumId 为 null
                   params.museumId = null; 

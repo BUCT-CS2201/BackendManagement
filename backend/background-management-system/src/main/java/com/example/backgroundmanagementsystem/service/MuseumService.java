@@ -16,11 +16,11 @@ public interface MuseumService {
      * 新增或修改博物馆
      * @param museum
      */
-    void addOrUpdateMuseum(Museum museum);
+    void addOrUpdateMuseum(Museum museum,String adminName);
 
     /**
      * 删除博物馆
      * @param museumId
      */
-    void deleteMuseum(Long museumId);
+    void deleteMuseum(Long museumId,String adminName);
 }

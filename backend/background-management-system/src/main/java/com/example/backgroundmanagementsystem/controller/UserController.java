@@ -39,8 +39,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/addOrUpdateUser")
-    public ResponseVO addOrUpdateUser(@Valid User user){
-        userService.addOrUpdateUser(user);
+    public ResponseVO addOrUpdateUser(@Valid User user,String adminName){
+        userService.addOrUpdateUser(user,adminName);
         return ResponseUtils.success();
     }
 
@@ -50,8 +50,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/deleteUser")
-    public ResponseVO deleteUser(@NotNull Long userId){
-        userService.deleteUser(userId);
+    public ResponseVO deleteUser(@NotNull Long userId,String adminName){
+        userService.deleteUser(userId,adminName);
         return ResponseUtils.success();
     }
 

@@ -151,11 +151,14 @@ export default {
 <script setup>
 import { ref, getCurrentInstance,onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useUserInfoStore } from '@/stores/userInfoStore'
 import Table from "@/components/Table.vue";
 
 const { proxy } = getCurrentInstance();
 // 路由
 const router = useRouter();
+// 用户信息
+const userInfoStore = useUserInfoStore()
 // 表单
 const tableData = ref({});
 // 表单样式
@@ -269,7 +272,8 @@ const deleteRelic = async (row,needConfirm=false)=>{
   let result = await proxy.Request.request({
     url: proxy.Api.deleteRelic,
     params: {
-      relicId: row.relicId
+      relicId: row.relicId,
+      params.adminName = userInfoStore.userInfo.name
     }
   });
   if (!result) {

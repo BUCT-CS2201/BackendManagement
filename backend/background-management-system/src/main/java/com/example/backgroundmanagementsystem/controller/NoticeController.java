@@ -46,8 +46,8 @@ public class NoticeController {
      * @return
      */
     @PostMapping("/addOrUpdateNotice")
-    public ResponseVO addOrUpdateNotice(@Valid Notice notice){
-        noticeService.addOrUpdateNotice(notice);
+    public ResponseVO addOrUpdateNotice(@Valid Notice notice,String adminName){
+        noticeService.addOrUpdateNotice(notice,adminName);
         return ResponseUtils.success();
     }
 
@@ -57,8 +57,8 @@ public class NoticeController {
      * @return
      */
     @PostMapping("/deleteNotice")
-    public ResponseVO deleteNotice(@NotNull Long noticeId){
-        noticeService.deleteNotice(noticeId);
+    public ResponseVO deleteNotice(@NotNull Long noticeId,String adminName){
+        noticeService.deleteNotice(noticeId,adminName);
         return ResponseUtils.success();
     }
 }

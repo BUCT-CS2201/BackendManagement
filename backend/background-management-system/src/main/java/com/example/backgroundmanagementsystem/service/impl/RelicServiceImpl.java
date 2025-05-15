@@ -3,6 +3,7 @@ package com.example.backgroundmanagementsystem.service.impl;
 import com.example.backgroundmanagementsystem.enums.OperationTypeEnum;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
+import com.example.backgroundmanagementsystem.mapper.AdminLogMapper;
 import com.example.backgroundmanagementsystem.mapper.RelicMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.RelicPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Relic;
@@ -26,6 +27,7 @@ import java.util.logging.LogManager;
 @RequiredArgsConstructor
 public class RelicServiceImpl implements RelicService {
     private final RelicMapper relicMapper;
+    private final AdminLogMapper adminLogMapper;
     /**
      * 文物分页查询
      * @param relicPageQueryDTO
@@ -45,7 +47,7 @@ public class RelicServiceImpl implements RelicService {
      * @param cultural_relic
      */
     @Override
-    public void addOrUpdateRelic(Relic cultural_relic) {
+    public void addOrUpdateRelic(Relic cultural_relic,String adminName) {
         log.info("新增或修改文物{}", cultural_relic);
         Relic existName = relicMapper.findByName(cultural_relic.getName());
         // 新增
@@ -56,6 +58,7 @@ public class RelicServiceImpl implements RelicService {
             }
             // 插入
             relicMapper.insert(cultural_relic);
+            adminLogMapper.addLog(adminName, "新增文物："+cultural_relic.getName());
         } else {
             // 修改
             // 要修改的文物名称被其他文物使用
@@ -64,6 +67,7 @@ public class RelicServiceImpl implements RelicService {
             }
             // 修改
             relicMapper.update(cultural_relic);
+            adminLogMapper.addLog(adminName, "修改文物："+cultural_relic.getRelicId());
         }
     }
 
@@ -72,8 +76,9 @@ public class RelicServiceImpl implements RelicService {
      * @param relicId
      */
     @Override
-    public void deleteRelic(Long relicId) {
+    public void deleteRelic(Long relicId,String adminName) {
         log.info("删除文物：{}",relicId);
         relicMapper.delete(relicId);
+        adminLogMapper.addLog(adminName, "删除文物："+relicId);
     }
 }

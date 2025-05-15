@@ -17,11 +17,11 @@ public interface NoticeService {
      * 新增公告
      * @param notice
      */
-    void addOrUpdateNotice(Notice notice);
+    void addOrUpdateNotice(Notice notice,String adminName);
 
     /**
      * 删除公告
      * @param noticeId
      */
-    void deleteNotice(Long noticeId);
+    void deleteNotice(Long noticeId,String adminName);
 }

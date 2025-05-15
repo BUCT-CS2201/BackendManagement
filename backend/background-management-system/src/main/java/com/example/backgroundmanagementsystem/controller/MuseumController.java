@@ -37,8 +37,8 @@ public class MuseumController {
      * @return
      */
     @PostMapping("/addOrUpdateMuseum")
-    public ResponseVO addOrUpdateMuseum(@Valid Museum museum){
-        museumService.addOrUpdateMuseum(museum);
+    public ResponseVO addOrUpdateMuseum(@Valid Museum museum,String adminName){
+        museumService.addOrUpdateMuseum(museum,adminName);
         return ResponseUtils.success();
     }
 
@@ -48,8 +48,8 @@ public class MuseumController {
      * @return
      */
     @PostMapping("/deleteMuseum")
-    public ResponseVO deleteMuseum(@NotNull Long museumId){
-        museumService.deleteMuseum(museumId);
+    public ResponseVO deleteMuseum(@NotNull Long museumId,String adminName){
+        museumService.deleteMuseum(museumId,adminName);
         return ResponseUtils.success();
     }
 }

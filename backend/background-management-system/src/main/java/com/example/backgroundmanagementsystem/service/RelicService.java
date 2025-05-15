@@ -17,11 +17,11 @@ public interface RelicService {
      * 新增或修改用户
      * @param cultural_relic
      */
-    void addOrUpdateRelic(Relic cultural_relic);
+    void addOrUpdateRelic(Relic cultural_relic,String adminName);
 
     /**
      * 删除用户
      * @param relicId
      */
-    void deleteRelic(Long relicId);
+    void deleteRelic(Long relicId,String adminName);
 }

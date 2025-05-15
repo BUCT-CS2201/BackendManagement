@@ -2,6 +2,7 @@ package com.example.backgroundmanagementsystem.service.impl;
 
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
+import com.example.backgroundmanagementsystem.mapper.AdminLogMapper;
 import com.example.backgroundmanagementsystem.mapper.MuseumMapper;
 import com.example.backgroundmanagementsystem.mapper.NoticeMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.MuseumPageQueryDTO;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MuseumServicempl implements MuseumService {
     private final MuseumMapper museumMapper;
     private final NoticeMapper noticeMapper;
+    private final AdminLogMapper adminLogMapper;
     /**
      * 博物馆分页查询
      * @param museumPageQueryDTO
@@ -41,7 +43,7 @@ public class MuseumServicempl implements MuseumService {
      * @param museum
      */
     @Override
-    public void addOrUpdateMuseum(Museum museum) {
+    public void addOrUpdateMuseum(Museum museum,String adminName) {
         log.info("新增或修改博物馆{}",museum);
         Museum existMuseumName = museumMapper.findByMuseumName(museum.getMuseumName());
         // 新增
@@ -52,6 +54,7 @@ public class MuseumServicempl implements MuseumService {
             }
             // 插入
             museumMapper.insert(museum);
+            adminLogMapper.addLog(adminName, "添加博物馆："+museum.getMuseumName());
         }else{
             // 修改
             // 要修改的名称被使用
@@ -60,6 +63,7 @@ public class MuseumServicempl implements MuseumService {
             }
             // 修改
             museumMapper.update(museum);
+            adminLogMapper.addLog(adminName, "修改博物馆："+museum.getMuseumId());
         }
     }
 
@@ -69,10 +73,11 @@ public class MuseumServicempl implements MuseumService {
      */
     @Override
     @Transactional
-    public void deleteMuseum(Long museumId) {
+    public void deleteMuseum(Long museumId,String adminName) {
         log.info("删除博物馆：{}",museumId);
         // 删除关联的公告
         noticeMapper.deleteByMuseumId(museumId);
         museumMapper.delete(museumId);
+        adminLogMapper.addLog(adminName, "删除博物馆:"+museumId);
     }
 }

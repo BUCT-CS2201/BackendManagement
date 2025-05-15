@@ -2,6 +2,7 @@ package com.example.backgroundmanagementsystem.service.impl;
 
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
+import com.example.backgroundmanagementsystem.mapper.AdminLogMapper;
 import com.example.backgroundmanagementsystem.mapper.MuseumMapper;
 import com.example.backgroundmanagementsystem.mapper.NoticeMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.NoticePageQueryDTO;
@@ -26,6 +27,7 @@ import java.time.temporal.ChronoUnit;
 public class NoticeServicelmpl implements NoticeService {
     private final NoticeMapper noticeMapper;
     private final MuseumMapper museumMapper;
+    private final AdminLogMapper adminLogMapper;
     /**
      * 公告分页查询
      * @param noticePageQueryDTO
@@ -42,7 +44,7 @@ public class NoticeServicelmpl implements NoticeService {
 
     
     @Override
-    public void addOrUpdateNotice(Notice notice) {
+    public void addOrUpdateNotice(Notice notice,String adminName) {
         log.info("新增或修改公告{}",notice);
         // 关联的博物馆不存在
         Museum museum = museumMapper.existById(notice.getMuseumId());
@@ -53,6 +55,7 @@ public class NoticeServicelmpl implements NoticeService {
         if(null==notice.getNoticeId()){
             // 插入
             noticeMapper.insert(notice);
+            adminLogMapper.addLog(adminName, "添加公告："+notice.getNoticeTitle());
         }
         else{
             // 修改
@@ -65,8 +68,9 @@ public class NoticeServicelmpl implements NoticeService {
      * @param noticeId
      */
     @Override
-    public void deleteNotice(Long noticeId) {
+    public void deleteNotice(Long noticeId,String adminName) {
         log.info("删除公告：{}",noticeId);
         noticeMapper.delete(noticeId);
+        adminLogMapper.addLog(adminName, "删除公告："+noticeId);
     }
 }

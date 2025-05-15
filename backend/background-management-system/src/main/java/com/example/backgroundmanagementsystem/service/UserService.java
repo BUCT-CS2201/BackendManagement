@@ -17,13 +17,13 @@ public interface UserService {
      * 新增或修改用户
      * @param user
      */
-    void addOrUpdateUser(User user);
+    void addOrUpdateUser(User user,String adminName);
 
     /**
      * 删除用户
      * @param userId
      */
-    void deleteUser(Long userId);
+    void deleteUser(Long userId,String adminName);
 
     /**
      * 修改用户评论状态

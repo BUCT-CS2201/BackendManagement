@@ -23,7 +23,7 @@ public class RelicController {
     private final RelicService relicService;
 
     /**
-     * 加载用户列表
+     * 加载藏品
      * @param relicPageQueryDTO
      * @return
      */
@@ -34,24 +34,24 @@ public class RelicController {
     }
 
     /**
-     * 添加或修改用户
+     * 添加或修改藏品
      * @param cultural_relic
      * @return
      */
     @PostMapping("/addOrUpdateRelic")
-    public ResponseVO addOrUpdateRelic(@Valid Relic cultural_relic){
-        relicService.addOrUpdateRelic(cultural_relic);
+    public ResponseVO addOrUpdateRelic(@Valid Relic cultural_relic,String adminName){
+        relicService.addOrUpdateRelic(cultural_relic,adminName);
         return ResponseUtils.success();
     }
 
     /**
-     * 删除用户
+     * 删除藏品
      * @param relicId
      * @return
      */
     @PostMapping("/deleteRelic")
-    public ResponseVO deleteRelic(@NotNull Long relicId){
-        relicService.deleteRelic(relicId);
+    public ResponseVO deleteRelic(@NotNull Long relicId,String adminName){
+        relicService.deleteRelic(relicId,adminName);
         return ResponseUtils.success();
     }
 }

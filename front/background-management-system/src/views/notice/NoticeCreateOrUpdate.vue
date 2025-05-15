@@ -28,8 +28,11 @@
  <script setup>
     import { useRoute,useRouter} from 'vue-router';
     import {ref,reactive,onMounted,getCurrentInstance} from 'vue';
+    import { useUserInfoStore } from '@/stores/userInfoStore'
     const route = useRoute();
     const router = useRouter();
+    // 用户信息
+    const userInfoStore = useUserInfoStore()
     const proxy = getCurrentInstance().proxy;
     const dataFormRef = ref(null);
     // 表单
@@ -72,6 +75,7 @@
                    // 提交表单
                    let params = {};
                    Object.assign(params,dataForm);
+                   params.adminName = userInfoStore.userInfo.name;
                    if(!params.noticeTime || params.noticeTime.length == 0){
                      delete params.noticeTime;
                    }
