@@ -273,7 +273,7 @@ const deleteRelic = async (row,needConfirm=false)=>{
     url: proxy.Api.deleteRelic,
     params: {
       relicId: row.relicId,
-      params.adminName = userInfoStore.userInfo.name
+      adminName: userInfoStore.userInfo.name
     }
   });
   if (!result) {
