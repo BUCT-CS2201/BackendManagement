@@ -72,8 +72,10 @@ service:
   image-folder: ${cultural-relics.service.image-folder}
   # 数据库备份配置信息
   database:
-    # 默认文件夹
-    default-folder: ${cultural-relics.service.database.default-folder}
+    # windows环境文件夹
+    windows-backup-folder: ${cultural-relics.service.database.windows-backup-folder}
+    # linux环境文件夹
+    linux-backup-folder: ${cultural-relics.service.database.linux-backup-folder}
     host: ${cultural-relics.service.database.host}
     port: ${cultural-relics.service.database.port}
     username: ${cultural-relics.service.database.username}
