@@ -28,5 +28,9 @@ const api={
     loadImageList: "/image/loadImageList", // 加载图片列表
     updateImageStatus: "/image/updateImageStatus", // 更新图片状态
     loadImageBaseURL: "/api/image/loadImage", // 加载图片的baseURL
+    //藏品信息模块
+    loadRelicList: "/relic/loadRelicList", // 加载文物列表
+    addOrUpdateRelic: "/relic/addOrUpdateRelic", // 添加或修改文物
+    deleteRelic: "/relic/deleteRelic", // 删除文物
 }
 export default api;
