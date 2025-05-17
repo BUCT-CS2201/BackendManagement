@@ -156,36 +156,32 @@ public class DataBaseUtils {
         sb.append(" -P").append(port);
         sb.append(" -u").append(userName);
         sb.append(" -p").append(password);
-        sb.append(" " + dbName + " <");
+        sb.append(" ").append(dbName).append(" <");
         sb.append(filePath);
         System.out.println("cmd命令为：" + sb);
         Runtime runtime = Runtime.getRuntime();
         System.out.println("开始还原数据");
         try {
             Process process = runtime.exec("cmd /c" + sb);
-
             //输出错误信息
             FileInputStream errorStream = (FileInputStream) process.getErrorStream();
             InputStreamReader isr = new InputStreamReader(errorStream, "gbk");//读取
-            System.out.println(isr.getEncoding());
             BufferedReader bufr = new BufferedReader(isr);//缓冲
             String line;
             while ((line = bufr.readLine()) != null) {
                 System.out.println("error:" + line);
             }
             isr.close();
-
-
             InputStream is = process.getInputStream();
-            BufferedReader bf = new BufferedReader(new InputStreamReader(is, "utf8"));
+            BufferedReader bf = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             while ((line = bf.readLine()) != null) {
                 System.out.println(line);
             }
             is.close();
             bf.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"数据库恢复失败");
         }
-        System.out.println("还原成功！");
+        log.info("数据库恢复成功");
     }
 }

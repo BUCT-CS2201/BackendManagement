@@ -81,4 +81,20 @@ public class DataBaseServiceImpl implements DataBaseService {
         log.info("获取默认备份路径");
         return dataBaseUtils.getDefaultPath();
     }
+
+    @Override
+    @Transactional
+    public void recover(Integer id) {
+        log.info("数据库恢复：{}",id);
+        DataBaseBR dataBaseBR = dataBaseMapper.findById(id);
+        if(null==dataBaseBR){
+            throw new BaseException(ResponseCodeEnum.CODE_600);
+        }
+        File file = new File(dataBaseBR.getPath());
+        if(!file.exists()){
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"该备份文件已被删除");
+        }
+        dataBaseUtils.dbRestore(dataBaseBR.getPath());
+        adminLogMapper.addLog(BaseContext.getUserToken().getName(),"恢复数据库备份:"+id);
+    }
 }

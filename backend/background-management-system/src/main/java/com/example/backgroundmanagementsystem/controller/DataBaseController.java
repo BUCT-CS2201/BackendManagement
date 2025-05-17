@@ -60,4 +60,15 @@ public class DataBaseController {
     public ResponseVO<String> getDefaultPath(){
         return ResponseUtils.success(dataBaseService.getDefaultPath());
     }
+
+    /**
+     * 恢复
+     * @param id
+     * @return
+     */
+    @PostMapping("/recover")
+    public ResponseVO recover(@NotNull Integer id){
+        dataBaseService.recover(id);
+        return ResponseUtils.success();
+    }
 }

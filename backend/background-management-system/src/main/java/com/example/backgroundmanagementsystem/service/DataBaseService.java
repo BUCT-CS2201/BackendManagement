@@ -29,4 +29,10 @@ public interface DataBaseService {
      * @return
      */
     String getDefaultPath();
+
+    /**
+     * 数据库恢复
+     * @param id
+     */
+    void recover(Integer id);
 }
