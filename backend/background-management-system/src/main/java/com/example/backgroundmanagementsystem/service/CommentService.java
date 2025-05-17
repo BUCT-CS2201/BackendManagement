@@ -17,4 +17,10 @@ public interface CommentService {
      * @param commentStatusUpdateDTO
      */
     void updateCommentStatus(CommentStatusUpdateDTO commentStatusUpdateDTO);
+
+    /**
+     * 删除评论
+     * @param commentId
+     */
+    void deleteComment(Long commentId);
 }

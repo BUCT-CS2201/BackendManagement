@@ -6,6 +6,7 @@ import com.example.backgroundmanagementsystem.pojo.dto.UserImagePageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.UserImage;
 import com.example.backgroundmanagementsystem.pojo.vo.UserImageVO;
 import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
@@ -33,4 +34,7 @@ public interface ImageMapper {
     @Update("update user_image set status=#{status},update_time=#{updateTime} where comment_id=#{commentId}")
     @AutoFill(OperationTypeEnum.UPDATE)
     void updateStatusByCommentId(UserImage userImage);
+
+    @Delete("delete from user_image where comment_id=#{commentId}")
+    void deleteByCommentId(Long commentId);
 }

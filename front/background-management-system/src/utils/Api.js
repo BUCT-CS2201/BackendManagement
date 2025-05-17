@@ -29,6 +29,7 @@ const api={
     // 评论模块
     loadCommentList: "/comment/loadCommentList", // 加载评论列表
     updateCommentStatus: "/comment/updateCommentStatus", // 更新评论状态
+    deleteComment: "/comment/deleteComment", // 删除评论
     // 图片模块
     loadImageList: "/image/loadImageList", // 加载图片列表
     updateImageStatus: "/image/updateImageStatus", // 更新图片状态

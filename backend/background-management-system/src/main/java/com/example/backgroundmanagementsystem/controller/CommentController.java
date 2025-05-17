@@ -43,4 +43,10 @@ public class CommentController {
         commentService.updateCommentStatus(commentStatusUpdateDTO);
         return ResponseUtils.success();
     }
+
+    @PostMapping("/deleteComment")
+    public ResponseVO deleteComment(@NotNull Long commentId){
+        commentService.deleteComment(commentId);
+        return ResponseUtils.success();
+    }
 }

@@ -6,6 +6,7 @@ import com.example.backgroundmanagementsystem.pojo.dto.CommentPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Comment;
 import com.example.backgroundmanagementsystem.pojo.vo.CommentVO;
 import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -26,4 +27,10 @@ public interface CommentMapper {
 
     @Select("select * from relic_comment where comment_id=#{commentId}")
     Comment findByCommentId(Long commentId);
+
+    @Delete("delete from relic_comment where comment_id=#{commentId}")
+    void deleteByCommentId(Long commentId);
+
+    @Delete("delete from relic_comment where parent_id=#{parentId}")
+    void deleteByParentId(Long parentId);
 }

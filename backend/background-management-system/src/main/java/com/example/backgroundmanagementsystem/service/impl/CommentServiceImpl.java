@@ -1,9 +1,11 @@
 package com.example.backgroundmanagementsystem.service.impl;
 
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.enums.ReviewStatusEnum;
 import com.example.backgroundmanagementsystem.enums.UserCommentStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
+import com.example.backgroundmanagementsystem.mapper.AdminLogMapper;
 import com.example.backgroundmanagementsystem.mapper.CommentMapper;
 import com.example.backgroundmanagementsystem.mapper.ImageMapper;
 import com.example.backgroundmanagementsystem.mapper.UserMapper;
@@ -30,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
     private final UserMapper userMapper;
     private final ImageMapper imageMapper;
-
+    private final AdminLogMapper adminLogMapper;
     /**
      * 加载评论列表
      * @param commentPageQueryDTO
@@ -65,6 +67,9 @@ public class CommentServiceImpl implements CommentService {
         if(parentId!=null){
             // 父评论
             Comment parentComment = commentMapper.findByCommentId(parentId);
+            if(parentComment==null){
+                throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"该评论所属父评论已被删除");
+            }
             if(!ReviewStatusEnum.APPROVED.getStatus().equals(parentComment.getStatus())
                 && ReviewStatusEnum.APPROVED.getStatus().equals(status)
             ){
@@ -81,6 +86,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setCommentId(commentId);
         comment.setStatus(status);
         commentMapper.updateStatusByCommentId(comment);
+        adminLogMapper.addLog(BaseContext.getUserToken().getName(), "修改评论状态:"+commentId);
         // 评论状态修改时，关联子评论和图片
         if(!ReviewStatusEnum.APPROVED.getStatus().equals(status)){
             // 父评论由过审改为未过审，则子评论全变为未过审
@@ -92,5 +98,18 @@ public class CommentServiceImpl implements CommentService {
             userImage.setStatus(status);
             imageMapper.updateStatusByCommentId(userImage);
         }
+    }
+
+    @Override
+    @Transactional
+    public void deleteComment(Long commentId) {
+        log.info("删除评论");
+        // 删除评论
+        commentMapper.deleteByCommentId(commentId);
+        // 删除子评论
+        commentMapper.deleteByParentId(commentId);
+        // 删除图片
+        imageMapper.deleteByCommentId(commentId);
+        adminLogMapper.addLog(BaseContext.getUserToken().getName(), "删除评论:"+commentId);
     }
 }

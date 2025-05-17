@@ -1,8 +1,10 @@
 package com.example.backgroundmanagementsystem.service.impl;
 
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.enums.ResponseCodeEnum;
 import com.example.backgroundmanagementsystem.enums.ReviewStatusEnum;
 import com.example.backgroundmanagementsystem.exceptions.BaseException;
+import com.example.backgroundmanagementsystem.mapper.AdminLogMapper;
 import com.example.backgroundmanagementsystem.mapper.CommentMapper;
 import com.example.backgroundmanagementsystem.mapper.ImageMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.UserImagePageQueryDTO;
@@ -34,6 +36,7 @@ import java.io.FileInputStream;
 public class ImageServiceImpl implements ImageService {
     private final ImageMapper imageMapper;
     private final CommentMapper commentMapper;
+    private final AdminLogMapper adminLogMapper;
     @Value("${service.image-folder}")
     private String imageFolderPath;
     @Override
@@ -68,6 +71,7 @@ public class ImageServiceImpl implements ImageService {
         userImage.setImageId(imageId);
         userImage.setStatus(status);
         imageMapper.updateStatusByImageId(userImage);
+        adminLogMapper.addLog(BaseContext.getUserToken().getName(), "修改图片状态:"+imageId);
     }
 
     @Override
