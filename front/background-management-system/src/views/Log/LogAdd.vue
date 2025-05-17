@@ -1,6 +1,6 @@
 <template>
     <div style="display: flex;background-color: rgb(221.7, 222.6, 224.4); width: 100%; height: 350px">
-      <el-form ref="dataFormRef" :model="dataForm" label-width="80px" style="margin-top: 25px;width: 800px" :rules="rules">
+      <el-form ref="dataFormRef" :model="dataForm" label-width="130px" style="margin-top: 25px;width: 800px" :rules="rules">
         <el-form-item label="管理员姓名" prop="adminName">
          <el-input v-model="dataForm.adminName" placeholder="请输入管理员姓名"/>
         </el-form-item>

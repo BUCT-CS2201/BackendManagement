@@ -98,7 +98,7 @@ const columns = [
   {
     label: "操作内容",
     prop: "operation",
-    width: "200",
+    width: "250",
     scopedSlots: "slot_operation",
     fixed: false
   },
