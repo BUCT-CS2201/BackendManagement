@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.logging.LogManager;
@@ -47,6 +48,7 @@ public class RelicServiceImpl implements RelicService {
      * @param cultural_relic
      */
     @Override
+    @Transactional
     public void addOrUpdateRelic(Relic cultural_relic,String adminName) {
         log.info("新增或修改文物{}", cultural_relic);
         Relic existName = relicMapper.findByName(cultural_relic.getName());
@@ -76,6 +78,7 @@ public class RelicServiceImpl implements RelicService {
      * @param relicId
      */
     @Override
+    @Transactional
     public void deleteRelic(Long relicId,String adminName) {
         log.info("删除文物：{}",relicId);
         relicMapper.delete(relicId);

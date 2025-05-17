@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -44,6 +45,7 @@ public class NoticeServicelmpl implements NoticeService {
 
     
     @Override
+    @Transactional
     public void addOrUpdateNotice(Notice notice,String adminName) {
         log.info("新增或修改公告{}",notice);
         // 关联的博物馆不存在
@@ -60,6 +62,7 @@ public class NoticeServicelmpl implements NoticeService {
         else{
             // 修改
             noticeMapper.update(notice);
+            adminLogMapper.addLog(adminName, "修改公告："+notice.getNoticeTitle());
         }
     }
 
@@ -68,6 +71,7 @@ public class NoticeServicelmpl implements NoticeService {
      * @param noticeId
      */
     @Override
+    @Transactional
     public void deleteNotice(Long noticeId,String adminName) {
         log.info("删除公告：{}",noticeId);
         noticeMapper.delete(noticeId);

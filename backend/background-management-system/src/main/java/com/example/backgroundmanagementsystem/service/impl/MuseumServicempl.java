@@ -43,6 +43,7 @@ public class MuseumServicempl implements MuseumService {
      * @param museum
      */
     @Override
+    @Transactional
     public void addOrUpdateMuseum(Museum museum,String adminName) {
         log.info("新增或修改博物馆{}",museum);
         Museum existMuseumName = museumMapper.findByMuseumName(museum.getMuseumName());

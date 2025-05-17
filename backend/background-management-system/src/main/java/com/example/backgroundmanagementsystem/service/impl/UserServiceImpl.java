@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
             // 修改
             userMapper.update(user);
             adminLogMapper.addLog(adminName, "修改用户信息:"+user.getUserId());
-            // logMapper.xxinsert()
         }
     }
 
