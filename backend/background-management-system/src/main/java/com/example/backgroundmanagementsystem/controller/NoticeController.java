@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.mapper.NoticeMapper;
 import com.example.backgroundmanagementsystem.pojo.dto.NoticePageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Notice;
@@ -46,8 +47,8 @@ public class NoticeController {
      * @return
      */
     @PostMapping("/addOrUpdateNotice")
-    public ResponseVO addOrUpdateNotice(@Valid Notice notice,String adminName){
-        noticeService.addOrUpdateNotice(notice,adminName);
+    public ResponseVO addOrUpdateNotice(@Valid Notice notice){
+        noticeService.addOrUpdateNotice(notice, BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 
@@ -57,8 +58,8 @@ public class NoticeController {
      * @return
      */
     @PostMapping("/deleteNotice")
-    public ResponseVO deleteNotice(@NotNull Long noticeId,String adminName){
-        noticeService.deleteNotice(noticeId,adminName);
+    public ResponseVO deleteNotice(@NotNull Long noticeId){
+        noticeService.deleteNotice(noticeId,BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 }

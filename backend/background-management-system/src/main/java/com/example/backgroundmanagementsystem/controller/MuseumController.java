@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.pojo.dto.MuseumPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Museum;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
@@ -37,8 +38,8 @@ public class MuseumController {
      * @return
      */
     @PostMapping("/addOrUpdateMuseum")
-    public ResponseVO addOrUpdateMuseum(@Valid Museum museum,String adminName){
-        museumService.addOrUpdateMuseum(museum,adminName);
+    public ResponseVO addOrUpdateMuseum(@Valid Museum museum){
+        museumService.addOrUpdateMuseum(museum, BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 
@@ -48,8 +49,8 @@ public class MuseumController {
      * @return
      */
     @PostMapping("/deleteMuseum")
-    public ResponseVO deleteMuseum(@NotNull Long museumId,String adminName){
-        museumService.deleteMuseum(museumId,adminName);
+    public ResponseVO deleteMuseum(@NotNull Long museumId){
+        museumService.deleteMuseum(museumId,BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 }

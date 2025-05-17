@@ -28,12 +28,6 @@
                     </el-icon>
                     <span style="margin-left: 8px;">图片审核</span>
                 </el-menu-item> 
-                <el-menu-item index="/manage/videoReview">
-                    <el-icon style="color:#0483d4;margin-left: 8px;">
-                        <VideoPlay style="width: 20px; height: 20px;" />
-                    </el-icon>
-                    <span style="margin-left: 8px;">视频审核</span>
-                </el-menu-item>
             </el-sub-menu>
             
             <el-sub-menu index="DataManagement">

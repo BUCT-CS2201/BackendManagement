@@ -155,7 +155,6 @@ const onSubmit = ()=>{
           // 提交表单
           let params = {};
           Object.assign(params,dataForm);
-          params.adminName = userInfoStore.userInfo.name;
           // 确保 likesCount 和 viewsCount 存在且不为 0 时才传递，否则不包含在 params 中
           let result = await proxy.Request.request({
             url: proxy.Api.addOrUpdateRelic,

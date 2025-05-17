@@ -75,7 +75,6 @@
                    // 提交表单
                    let params = {};
                    Object.assign(params,dataForm);
-                   params.adminName = userInfoStore.userInfo.name;
                    if(!params.noticeTime || params.noticeTime.length == 0){
                      delete params.noticeTime;
                    }

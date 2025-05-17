@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
@@ -39,8 +40,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/addOrUpdateUser")
-    public ResponseVO addOrUpdateUser(@Valid User user,String adminName){
-        userService.addOrUpdateUser(user,adminName);
+    public ResponseVO addOrUpdateUser(@Valid User user){
+        userService.addOrUpdateUser(user, BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 
@@ -50,8 +51,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/deleteUser")
-    public ResponseVO deleteUser(@NotNull Long userId,String adminName){
-        userService.deleteUser(userId,adminName);
+    public ResponseVO deleteUser(@NotNull Long userId){
+        userService.deleteUser(userId,BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 

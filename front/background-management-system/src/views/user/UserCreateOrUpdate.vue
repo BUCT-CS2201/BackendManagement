@@ -115,7 +115,6 @@
                   // 提交表单
                   let params = {};
                   Object.assign(params,dataForm);
-                  params.adminName = userInfoStore.userInfo.name;
                   let result = await proxy.Request.request({
                      url: proxy.Api.addOrUpdateUser,
                      params: params

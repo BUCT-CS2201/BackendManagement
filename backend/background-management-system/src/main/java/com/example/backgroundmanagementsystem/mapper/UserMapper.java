@@ -2,6 +2,7 @@ package com.example.backgroundmanagementsystem.mapper;
 
 import com.example.backgroundmanagementsystem.annotations.AutoFill;
 import com.example.backgroundmanagementsystem.enums.OperationTypeEnum;
+import com.example.backgroundmanagementsystem.pojo.dto.AdminLogAddDTO;
 import com.example.backgroundmanagementsystem.pojo.dto.UserPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
 import com.example.backgroundmanagementsystem.pojo.vo.UserVO;

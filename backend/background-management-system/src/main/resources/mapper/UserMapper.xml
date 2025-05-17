@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.backgroundmanagementsystem.mapper.UserMapper">
     <!--新增-->
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
         insert into user(phone_number, password, id_number, name, description, gender, age, address, wechat, qq,account_status,comment_status,role_type,create_time,update_time)
             VALUES
         (#{phoneNumber},#{password},#{idNumber},#{name},#{description},#{gender},#{age},#{address},#{weChat},#{qq},#{accountStatus},#{commentStatus},#{roleType},#{createTime},#{updateTime})

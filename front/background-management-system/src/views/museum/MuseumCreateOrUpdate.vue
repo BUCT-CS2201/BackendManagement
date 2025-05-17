@@ -85,7 +85,6 @@
                // 打印提交的数据，确保新增时 museumId 为 null 或未传递
                console.log('提交的博物馆数据:', dataForm);
                let params = { ...dataForm };
-               params.adminName = userInfoStore.userInfo.name;
                if (!isEdit.value) {
                   // 新增时确保 museumId 为 null
                   params.museumId = null; 

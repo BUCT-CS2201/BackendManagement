@@ -53,11 +53,6 @@ const router = createRouter({
           component: () => import('@/views/review/ImageReviewManagement.vue'),
         },
         {
-          path: 'videoReview',
-          name: 'videoReview',
-          component: () => import('@/views/review/VideoReviewManagement.vue'),
-        },
-        {
           path: 'museum',
           name: 'museum',
           component: () => import('@/views/museum/MuseumManagement.vue'),

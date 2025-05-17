@@ -151,7 +151,6 @@ const deleteLog = async (row,needConfirm=false)=>{
     url: proxy.Api.deleteLog,
     params: {
       logId: row.logId,
-      adminName: userInfoStore.userInfo.name
     }
   });
   if (!result) {

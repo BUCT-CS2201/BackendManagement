@@ -161,7 +161,6 @@ const deleteMuseum = async (row,needConfirm=false)=>{
     url: proxy.Api.deleteMuseum,
     params: {
       museumId: row.museumId,
-      adminName: userInfoStore.userInfo.name
     }
   });
   if (!result) {

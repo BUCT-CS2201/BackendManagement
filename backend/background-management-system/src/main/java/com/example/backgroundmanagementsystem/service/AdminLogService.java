@@ -23,5 +23,5 @@ public interface AdminLogService {
      * @param dto
      */
     
-    Boolean addLog(AdminLogAddDTO dto);
+    void addLog(AdminLogAddDTO dto);
 }

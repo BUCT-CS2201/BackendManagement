@@ -33,13 +33,6 @@ public interface AdminLogMapper {
     void deleteLog(Long logId);
 
     /**
-     * 检查密码是否匹配
-     * @param dto
-     */
-    @Select("select name from user where name=#{adminName} and phone_number=#{phoneNumber} and password=#{password}")
-    String checkPassword(AdminLogAddDTO dto);
-
-    /**
      * 增加日志
      */
     @Insert("insert into admin_log (admin_name,operation,operation_time) " +

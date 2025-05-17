@@ -176,7 +176,6 @@ const deleteNotice = async (row,needConfirm=false)=>{
     url: proxy.Api.deleteNotice,
     params: {
       noticeId: row.noticeId,
-      adminName: userInfoStore.userInfo.name
     }
   });
   if (!result) {

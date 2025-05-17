@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(defaultPassword);
             // 插入
             userMapper.insert(user);
-            adminLogMapper.addLog(adminName, "新增用户:"+user.getPhoneNumber());
+            adminLogMapper.addLog(adminName, "新增用户:"+user.getUserId());
         }else{
             // 修改
             // 要修改的电话号码被使用

@@ -192,7 +192,6 @@ const deleteUser = async (row,needConfirm=false)=>{
     url: proxy.Api.deleteUser,
     params: {
       userId: row.userId,
-      adminName: userInfoStore.userInfo.name
     }
   });
   if (!result) {

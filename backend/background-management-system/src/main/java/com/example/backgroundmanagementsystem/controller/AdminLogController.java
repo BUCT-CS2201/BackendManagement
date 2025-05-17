@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.pojo.dto.AdminLogAddDTO;
 import com.example.backgroundmanagementsystem.pojo.dto.AdminLogPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.User;
@@ -24,7 +25,6 @@ public class AdminLogController {
     @PageQueryAutoFill
     public ResponseVO<PageResultVO> loadLogList(AdminLogPageQueryDTO dto){
         PageResultVO ans = adminLogService.loadLogList(dto);
-        System.out.println("\n ans is:"+ans);
         return ResponseUtils.success(ans);
     }
 
@@ -34,10 +34,8 @@ public class AdminLogController {
      * @return
      */
     @PostMapping("/deleteLog")
-    public ResponseVO deleteLog(@NotNull Long logId,String adminName){
-        System.out.println("\n logId is:"+logId);
-        System.out.println("\n adminName is:"+adminName);
-        adminLogService.deleteLog(logId,adminName);
+    public ResponseVO deleteLog(@NotNull Long logId){
+        adminLogService.deleteLog(logId, BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 
@@ -48,10 +46,7 @@ public class AdminLogController {
      */
     @PostMapping("/addLog")
     public ResponseVO addLog(@Valid AdminLogAddDTO dto){
-        if(adminLogService.addLog(dto)){
-            return ResponseUtils.success();
-        }else{
-            return ResponseUtils.error("输入信息 不匹配，添加失败");
-        }
+        adminLogService.addLog(dto);
+        return ResponseUtils.success();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.backgroundmanagementsystem.controller;
 
 import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.context.BaseContext;
 import com.example.backgroundmanagementsystem.pojo.dto.RelicPageQueryDTO;
 import com.example.backgroundmanagementsystem.pojo.entity.Relic;
 import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
@@ -39,8 +40,8 @@ public class RelicController {
      * @return
      */
     @PostMapping("/addOrUpdateRelic")
-    public ResponseVO addOrUpdateRelic(@Valid Relic cultural_relic,String adminName){
-        relicService.addOrUpdateRelic(cultural_relic,adminName);
+    public ResponseVO addOrUpdateRelic(@Valid Relic cultural_relic){
+        relicService.addOrUpdateRelic(cultural_relic, BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 
@@ -50,8 +51,8 @@ public class RelicController {
      * @return
      */
     @PostMapping("/deleteRelic")
-    public ResponseVO deleteRelic(@NotNull Long relicId,String adminName){
-        relicService.deleteRelic(relicId,adminName);
+    public ResponseVO deleteRelic(@NotNull Long relicId){
+        relicService.deleteRelic(relicId,BaseContext.getUserToken().getName());
         return ResponseUtils.success();
     }
 }
