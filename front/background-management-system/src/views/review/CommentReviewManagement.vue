@@ -86,8 +86,10 @@
             </template>
             <!-- 操作 -->
             <template #slotOperation="{ index, row }">
-                <el-dropdown @command="(status) => updateCommentStatus(row.commentId,status,row.parentId,row.userId)">
-                    <el-link style="color: #409EFF">修改评论状态</el-link>
+                    <el-dropdown @command="(status) => updateCommentStatus(row.commentId,status,row.parentId,row.userId)">
+                        <el-row class="operation-row">
+                        <el-link style="color: #409EFF">修改评论状态</el-link>
+                        </el-row>
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="0">审核中</el-dropdown-item>
@@ -96,7 +98,8 @@
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
-                <el-dropdown @command="(commentStatus) => updateUserCommentStatus(row.userId,commentStatus)">
+                <el-row class="operation-row">
+                    <el-dropdown @command="(commentStatus) => updateUserCommentStatus(row.userId,commentStatus)">
                     <el-link style="color: #E6A23C">修改用户评论状态</el-link>
                     <template #dropdown>
                         <el-dropdown-menu>
@@ -105,6 +108,10 @@
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
+                </el-row>
+                <el-row  class="operation-row">
+                    <el-link type="danger" @click="deleteComment(row,true)">删除评论</el-link>
+                </el-row>
             </template>
         </Table>
     </el-card>
@@ -255,6 +262,29 @@ const updateCommentStatus = async(commentId, status,parentId,userId)=> {
     proxy.Message.success("修改成功");
 }
 /**
+ * 删除评论
+ */
+ const deleteComment = async (row,needConfirm=false)=>{
+  if(needConfirm){
+    proxy.Confirm({
+      message: "确定要删除评论吗？",
+      okfun: ()=>deleteComment(row,false),
+    });
+    return;
+  }
+  let result = await proxy.Request.request({
+    url: proxy.Api.deleteComment,
+    params: {
+      commentId: row.commentId,
+    }
+  });
+  if (!result) {
+    return;
+  }
+  proxy.Message.success("删除成功");
+  loadDataList();
+}
+/**
  * 清空查询条件
  */
 const clearSearchForm = () => {
@@ -279,6 +309,10 @@ onMounted(() => {
   color: #409EFF;
   cursor: pointer;
 }
-
+}
+.operation-row{
+    display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;    /* 垂直居中 */
 }
 </style>
