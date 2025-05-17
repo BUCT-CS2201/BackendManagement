@@ -181,7 +181,7 @@ const loadDataList = async () => {
  * 加载图片URL
  */
 const loadImageURL = (imageId,imageSuffix)=>{
-    var url =  proxy.Api.devDomain+proxy.Api.loadImageBaseURL+"?imageName="+imageId+imageSuffix;
+    var url =  proxy.Api.devDomain+proxy.Api.loadImageBaseURL+"?imageName="+imageId+"."+imageSuffix;
     console.log("url:"+url)
     return url
 }
