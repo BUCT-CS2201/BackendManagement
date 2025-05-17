@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.backgroundmanagementsystem.mapper.DataBaseMapper">
+    <!--新增-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into database_backup_recover(admin_name,comment,path, create_time)
+            VALUES
+        (#{adminName}, #{comment},#{path}, #{createTime})
+    </insert>
+    <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.DataBaseBRVO">
+        select *
+        from database_backup_recover
+        <where>
+            <if test="id!=null">and id = #{id}</if>
+            <if test="adminName!=null">and admin_name like concat('%',#{adminName},'%')</if>
+            <if test="comment!=null">and comment like concat('%',#{comment},'%')</if>
+            <if test="backupTimeStart!=null">and create_time &gt;= #{backupTimeStart}</if>
+            <if test="backupTimeEnd!=null">and create_time &lt;= #{backupTimeEnd}</if>
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>

@@ -85,7 +85,12 @@ const router = createRouter({
         {
           path: 'database',
           name: 'database',
-          component: () => import('@/views/database/DatabaseManagement.vue'),
+          component: () => import('@/views/database/DataBaseManagement.vue'),
+        },
+        {
+          path: 'databaseCreateOrUpdate',
+          name: 'databaseCreateOrUpdate',
+          component: () => import('@/views/database/DataBaseCreateOrUpdate.vue'),
         },
         {
           path: 'relicCreateOrUpdate',

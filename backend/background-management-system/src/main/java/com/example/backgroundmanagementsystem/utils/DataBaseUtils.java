@@ -56,7 +56,7 @@ public class DataBaseUtils {
     /**
      * 备份数据库db
      */
-    public Boolean dbBackUp(){
+    public String dbBackUp(){
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-sss");
         String backName = dateFormat.format(date) + ".sql";
@@ -121,9 +121,9 @@ public class DataBaseUtils {
                 log.error("error: "+line);
             }
             isr.close();
-            Boolean success = process.exitValue() == 0 ;
+            boolean success = process.exitValue() == 0 ;
             log.info("数据库备份结束，备份是否成功：{}",success );
-            return success;
+            return success?pathSql:null;
         } catch (Exception e) {
             log.error("数据库备份错误");
             throw new BaseException(ResponseCodeEnum.CODE_500);

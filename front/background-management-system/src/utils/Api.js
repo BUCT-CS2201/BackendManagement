@@ -12,12 +12,11 @@ const api={
     loadUserList: "/user/loadUserList", // 加载用户列表
     addOrUpdateUser: "/user/addOrUpdateUser", // 添加或修改用户
     deleteUser: "/user/deleteUser", // 删除用户
-
+    updateUserCommentStatus: "/user/updateUserCommentStatus", // 修改用户评论状态
     // 日志模块 ✅
     loadLogList: "/log/loadLogList", // 查询日志列表
     deleteLog:"/log/deleteLog", // 删除日志
     addLog:"/log/addLog", // 增加日志
-    updateUserCommentStatus: "/user/updateUserCommentStatus", // 修改用户评论状态
     // 公告模块
     loadNoticeList: "/notice/loadNoticeList", // 加载公告列表
     addOrUpdateNotice: "/notice/addOrUpdateNotice", // 添加公告
@@ -38,5 +37,8 @@ const api={
     loadRelicList: "/relic/loadRelicList", // 加载文物列表
     addOrUpdateRelic: "/relic/addOrUpdateRelic", // 添加或修改文物
     deleteRelic: "/relic/deleteRelic", // 删除文物
+    // 数据库模块
+    loadDataBaseList: "/database/loadDataBaseList", // 加载数备份列表
+    deleteDataBaseBackup: "/database/deleteDataBaseBackup", // 删除数据库备份
 }
 export default api;

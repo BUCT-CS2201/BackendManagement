@@ -1,5 +1,8 @@
 package com.example.backgroundmanagementsystem.controller;
 
+import com.example.backgroundmanagementsystem.annotations.PageQueryAutoFill;
+import com.example.backgroundmanagementsystem.pojo.dto.DataBaseBRPageQueryDTO;
+import com.example.backgroundmanagementsystem.pojo.vo.PageResultVO;
 import com.example.backgroundmanagementsystem.pojo.vo.ResponseVO;
 import com.example.backgroundmanagementsystem.service.DataBaseService;
 import com.example.backgroundmanagementsystem.utils.ResponseUtils;
@@ -13,9 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DataBaseController {
     private final DataBaseService dataBaseService;
+
+    @PostMapping("/loadDataBaseList")
+    @PageQueryAutoFill
+    public ResponseVO<PageResultVO> loadDataBaseList(DataBaseBRPageQueryDTO dataBaseBRPageQueryDTO){
+        return ResponseUtils.success(dataBaseService.loadDataBaseList(dataBaseBRPageQueryDTO));
+    }
+
     @PostMapping("/backup")
-    public ResponseVO test(){
-        dataBaseService.test();
+    public ResponseVO backup(String comment){
+        dataBaseService.backup(comment);
         return ResponseUtils.success();
     }
 }
