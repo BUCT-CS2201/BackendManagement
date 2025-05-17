@@ -40,5 +40,7 @@ const api={
     // 数据库模块
     loadDataBaseList: "/database/loadDataBaseList", // 加载数备份列表
     deleteDataBaseBackup: "/database/deleteDataBaseBackup", // 删除数据库备份
+    addOrUpdateBackup: "/database/addOrUpdateBackup", // 添加或修改数据库备份
+    getDefaultPath: "/database/getDefaultPath", // 获取默认路径
 }
 export default api;

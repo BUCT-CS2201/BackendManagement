@@ -26,7 +26,7 @@
             />
           </el-form-item>
           <!-- 操作按钮 -->
-          <el-form-item>
+          <el-form-item style="margin-left: 980px;">
             <el-button type="primary" @click="clearSearchForm">清空</el-button>
             <el-button type="primary" @click="loadDataList">查询</el-button>
             <el-button type="primary" @click="router.push({ name: 'LogAdd' })">新增</el-button>

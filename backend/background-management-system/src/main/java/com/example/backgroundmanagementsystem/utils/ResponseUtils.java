@@ -33,14 +33,6 @@ public class ResponseUtils {
         return success(ResponseCodeEnum.CODE_200.getMsg(), data);
     }
 
-    /**
-     * 操作成功，返回自定义提示信息
-     * @param msg
-     * @return
-     */
-    public static ResponseVO success(String msg){
-        return success(msg,null);
-    }
 
     /**
      * 操作成功，返回默认提示信息

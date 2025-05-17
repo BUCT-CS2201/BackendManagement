@@ -4,10 +4,22 @@
 <mapper namespace="com.example.backgroundmanagementsystem.mapper.DataBaseMapper">
     <!--新增-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into database_backup_recover(admin_name,comment,path, create_time)
+        insert into database_backup_recover(admin_name,comment,path, create_time,update_time)
             VALUES
-        (#{adminName}, #{comment},#{path}, #{createTime})
+        (#{adminName}, #{comment},#{path}, #{createTime},#{updateTime})
     </insert>
+    <update id="update">
+        update
+            database_backup_recover
+        <set>
+            <if test="adminName!=null">admin_name=#{adminName},</if>
+            <if test="comment!=null">comment=#{comment},</if>
+            <if test="path!=null">path=#{path},</if>
+            <if test="createTime!=null">create_time=#{createTime},</if>
+            <if test="updateTime!=null">update_time=#{updateTime}</if>
+        </set>
+        where id = #{id}
+    </update>
     <select id="findBatch" resultType="com.example.backgroundmanagementsystem.pojo.vo.DataBaseBRVO">
         select *
         from database_backup_recover

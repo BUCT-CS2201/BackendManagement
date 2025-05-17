@@ -1,5 +1,7 @@
 package com.example.backgroundmanagementsystem.pojo.entity;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +29,6 @@ public class DataBaseBR extends BaseEntity{
     /**
      * 备份路径
      */
+    @NotEmpty
     private String path;
 }

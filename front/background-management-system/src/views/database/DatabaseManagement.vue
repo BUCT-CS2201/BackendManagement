@@ -44,13 +44,13 @@
         <template #slotComment="{index,row}">
           {{ row.comment }}
         </template>
-        <!-- 公告时间 -->
+        <!-- 备份时间 -->
         <template #slotCreateTime="{index,row}">
           {{ row.createTime }}
         </template>
         <!-- 操作 -->
       <template #slotOperation="{index,row}">
-        <el-link type="primary" @click="recover(row,true)">恢复</el-link>
+        <el-link type="warning" style="margin-right: 20px;" @click="recover(row,true)">恢复</el-link>
         <el-link type="primary"
           @click="router.push({name:'databaseCreateOrUpdate',query:{row:JSON.stringify(row)}})"
           style="margin-right: 20px">编辑</el-link>
@@ -93,16 +93,16 @@
     },
     {
       label: "备份注释",
-      prop: "slotComment",
+      prop: "comment",
       width: "330",
-      scopedSlots: "comment",
+      scopedSlots: "slotComment",
       fixed: false
     },
     {
       label: "备份时间",
-      prop: "slotCreateTime",
+      prop: "createTime",
       width: "200",
-      scopedSlots: "createTime",
+      scopedSlots: "slotCreateTime",
       fixed: false
     },
     {

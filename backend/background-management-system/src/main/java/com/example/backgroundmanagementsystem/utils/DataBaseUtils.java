@@ -53,27 +53,44 @@ public class DataBaseUtils {
     @Value("${service.database.linux-backup-folder}")
     private String linuxBackupFolder;
 
-    /**
-     * 备份数据库db
-     */
-    public String dbBackUp(){
+
+    public String getDefaultPath(){
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-sss");
         String backName = dateFormat.format(date) + ".sql";
         String pathSql;
+        //判断系统
+        String osName = System.getProperties().getProperty("os.name");
+        if (osName.equals("Linux")) {
+            pathSql = linuxBackupFolder + File.separator + backName;
+        } else {
+            pathSql = windowsBackupFolder + File.separator + backName;
+        }
+        return pathSql;
+    }
+
+    /**
+     * 备份数据库db
+     * @param path
+     */
+    public Boolean dbBackUp(String path){
+        /*Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-sss");
+        String backName = dateFormat.format(date) + ".sql";
+        String pathSql;*/
         //输出流文件
         File fileSql;
         try {
             //判断系统
             String osName = System.getProperties().getProperty("os.name");
-            if (osName.equals("Linux")) {
+            /*if (osName.equals("Linux")) {
                 pathSql = linuxBackupFolder + File.separator + backName;
             } else {
                 pathSql = windowsBackupFolder + File.separator + backName;
 
-            }
+            }*/
             //输出流文件
-            fileSql = new File(pathSql);
+            fileSql = new File(path);
             //创建备份sql文件
             if (!fileSql.exists()) {
                 fileSql.createNewFile();
@@ -90,7 +107,7 @@ public class DataBaseUtils {
             sb.append(osName.equals("Linux")?" --set-charset=UTF8":"");
             sb.append(" ").append(dbName).append(" ");
             sb.append("-r");//java中必须使用"-r"替代">"
-            sb.append(pathSql);
+            sb.append(path);
 
             Process process;
             //判断系统
@@ -106,7 +123,7 @@ public class DataBaseUtils {
                 }
                 printWriter.flush();
             } else {
-                System.out.println("cmd命令为：" + "cmd /c " + sb);
+               // System.out.println("cmd命令为：" + "cmd /c " + sb);
                 process = Runtime.getRuntime().exec("cmd /c " + sb);//执行语句
             }
             process.waitFor();//等待上述命令执行完毕后打印下面log
@@ -121,9 +138,7 @@ public class DataBaseUtils {
                 log.error("error: "+line);
             }
             isr.close();
-            boolean success = process.exitValue() == 0 ;
-            log.info("数据库备份结束，备份是否成功：{}",success );
-            return success?pathSql:null;
+            return process.exitValue() == 0 ;
         } catch (Exception e) {
             log.error("数据库备份错误");
             throw new BaseException(ResponseCodeEnum.CODE_500);
