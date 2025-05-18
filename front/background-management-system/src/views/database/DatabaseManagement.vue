@@ -44,6 +44,10 @@
         <template #slotComment="{index,row}">
           {{ row.comment }}
         </template>
+        <!-- 备份路径 -->
+        <template #slotPath="{index,row}">
+          {{ row.path }}
+        </template>
         <!-- 备份时间 -->
         <template #slotCreateTime="{index,row}">
           {{ row.createTime }}
@@ -80,22 +84,29 @@
     {
       label: "备份id",
       prop: "id",
-      width: "150",
+      width: "100",
       scopedSlots: "slotId",
       fixed: false
     },
     {
       label: "管理员名称",
       prop: "adminName",
-      width: "200",
+      width: "150",
       scopedSlots: "slotAdminName",
       fixed: false
     },
     {
       label: "备份注释",
       prop: "comment",
-      width: "330",
+      width: "200",
       scopedSlots: "slotComment",
+      fixed: false
+    },
+    {
+      label: "备份路径",
+      prop: "path",
+      width: "900",
+      scopedSlots: "slotPath",
       fixed: false
     },
     {
