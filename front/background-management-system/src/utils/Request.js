@@ -11,7 +11,7 @@ const contentTypeJson = 'application/json;charset=UTF-8'
 const instance = axios.create({
     // 请求路径加上/api作为前缀
     baseURL: Api.devDomain+"/api",
-    timeout: 10*1000,
+    timeout: 6000*1000,
 });
 // 加载对象
 let loading = null;

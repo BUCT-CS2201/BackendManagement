@@ -104,7 +104,8 @@ public class DataBaseUtils {
             sb.append(" -P").append(port);
             sb.append(" -u").append(userName);
             sb.append(" -p").append(password);
-            sb.append(osName.equals("Linux")?" --set-charset=UTF8":"");
+           // sb.append(osName.equals("Linux")?" --set-charset=UTF8":"");
+            sb.append(" --set-charset=UTF8");
             sb.append(" ").append(dbName).append(" ");
             sb.append("-r");//java中必须使用"-r"替代">"
             sb.append(path);
@@ -149,20 +150,27 @@ public class DataBaseUtils {
          * 恢复数据库
          * mysql -hlocalhost -uroot -proot dbname < /home/back.sql
          */
-    public void dbRestore (String filePath) {
+    public boolean dbRestore (String filePath) {
+        //判断系统
+        String osName = System.getProperties().getProperty("os.name").toLowerCase();
         StringBuilder sb = new StringBuilder();
         sb.append("mysql");
         sb.append(" -h").append(host);
         sb.append(" -P").append(port);
         sb.append(" -u").append(userName);
         sb.append(" -p").append(password);
-        sb.append(" ").append(dbName).append(" <");
-        sb.append(filePath);
+        sb.append(" --default-character-set=utf8");
+        sb.append(" ").append(dbName).append(" < ");
+        sb.append(filePath.trim());
         System.out.println("cmd命令为：" + sb);
-        Runtime runtime = Runtime.getRuntime();
         System.out.println("开始还原数据");
         try {
-            Process process = runtime.exec("cmd /c" + sb);
+            Process process = null;
+            if(osName.contains("windows")){
+                process = Runtime.getRuntime().exec("cmd /c "+ sb.toString().trim());
+            }else if(osName.contains("linux")){
+                process = Runtime.getRuntime().exec("/bin/sh -c "+ sb.toString().trim());
+            }
             //输出错误信息
             FileInputStream errorStream = (FileInputStream) process.getErrorStream();
             InputStreamReader isr = new InputStreamReader(errorStream, "gbk");//读取
@@ -179,9 +187,9 @@ public class DataBaseUtils {
             }
             is.close();
             bf.close();
+            return process.exitValue() == 0 ;
         } catch (IOException e) {
             throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"数据库恢复失败");
         }
-        log.info("数据库恢复成功");
     }
 }

@@ -167,6 +167,30 @@ const deleteDataBaseBackup = async (row,needConfirm=false)=>{
   loadDataList();
 }
 /**
+ * 恢复备份
+ */
+const recover = async (row,needConfirm=false)=>{
+  if(needConfirm){
+    proxy.Confirm({
+      message: "确定要恢复吗？",
+      okfun: ()=>recover(row,false),
+    });
+    return;
+  }
+  let result = await proxy.Request.request({
+    url: proxy.Api.recover,
+    params: {
+      id: row.id,
+    }
+  });
+  if (!result) {
+    return;
+  }
+  proxy.Message.success("恢复成功");
+  loadDataList();
+}
+
+/**
  * 清空查询条件
  */
 const clearSearchForm = () => {

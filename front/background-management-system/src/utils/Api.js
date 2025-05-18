@@ -42,5 +42,6 @@ const api={
     deleteDataBaseBackup: "/database/deleteDataBaseBackup", // 删除数据库备份
     addOrUpdateBackup: "/database/addOrUpdateBackup", // 添加或修改数据库备份
     getDefaultPath: "/database/getDefaultPath", // 获取默认路径
+    recover: "/database/recover", // 恢复数据库
 }
 export default api;

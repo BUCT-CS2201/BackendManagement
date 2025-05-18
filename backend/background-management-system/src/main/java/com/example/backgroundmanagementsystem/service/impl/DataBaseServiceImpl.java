@@ -44,7 +44,7 @@ public class DataBaseServiceImpl implements DataBaseService {
             String adminName = dataBaseBR.getAdminName();
             adminName = StringUtils.isEmpty(adminName)? BaseContext.getUserToken().getName() : adminName;
             dataBaseBRForInsert.setAdminName(adminName);
-            dataBaseBRForInsert.setComment(dataBaseBRForInsert.getComment());
+            dataBaseBRForInsert.setComment(dataBaseBR.getComment());
             dataBaseBRForInsert.setPath(path);
             dataBaseMapper.insert(dataBaseBRForInsert);
             adminLogMapper.addLog(BaseContext.getUserToken().getName(),"进行数据库备份:"+dataBaseBRForInsert.getId());
@@ -94,7 +94,12 @@ public class DataBaseServiceImpl implements DataBaseService {
         if(!file.exists()){
             throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"该备份文件已被删除");
         }
-        dataBaseUtils.dbRestore(dataBaseBR.getPath());
-        adminLogMapper.addLog(BaseContext.getUserToken().getName(),"恢复数据库备份:"+id);
+        boolean success = dataBaseUtils.dbRestore(dataBaseBR.getPath());
+        if(success){
+            adminLogMapper.addLog(BaseContext.getUserToken().getName(),"恢复数据库备份:"+id);
+            log.info("恢复成功");
+        }else{
+            throw new BaseException(ResponseCodeEnum.CODE_400.getCode(),"恢复失败");
+        }
     }
 }
