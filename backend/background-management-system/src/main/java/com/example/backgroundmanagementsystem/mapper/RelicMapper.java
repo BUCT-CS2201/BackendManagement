@@ -17,7 +17,7 @@ public interface RelicMapper {
     @AutoFill(OperationTypeEnum.INSERT)
     void insert(Relic cultural_relic);
 
-    @Select("select * from cultural_relic where name=#{name}")
+    @Select("select * from cultural_relic where name=#{name} limit 1")
     Relic findByName(String name);
 
     @AutoFill(OperationTypeEnum.UPDATE)
