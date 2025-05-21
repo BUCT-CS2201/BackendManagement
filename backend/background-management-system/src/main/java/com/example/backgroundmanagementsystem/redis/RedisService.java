@@ -10,6 +10,16 @@ import java.util.Map;
 public class RedisService {
 
     private static Map<String,UserTokenDTO> userTokenDTOMap = new HashMap<>();
+    private static Map<String,String> checkCodeMap = new HashMap<>();
+
+    /**
+     * 存储验证码
+     * @param phoneNumber
+     * @param checkCode
+     */
+    public void saveCheckCode(String phoneNumber, String checkCode) {
+        checkCodeMap.put(phoneNumber,checkCode);
+    }
 
     /**
      * 获取验证码
@@ -17,14 +27,16 @@ public class RedisService {
      * @return
      */
     public String getCheckCode(String phoneNumber) {
-        return null;
+        return checkCodeMap.get(phoneNumber);
     }
 
     /**
      * 清除验证码
      * @param phoneNumber
      */
-    public void removeCheckCode(String phoneNumber){}
+    public void removeCheckCode(String phoneNumber){
+        checkCodeMap.remove(phoneNumber);
+    }
 
 
     /**

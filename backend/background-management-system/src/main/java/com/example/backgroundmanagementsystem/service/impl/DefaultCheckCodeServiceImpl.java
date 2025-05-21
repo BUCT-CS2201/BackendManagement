@@ -21,6 +21,7 @@ public class DefaultCheckCodeServiceImpl implements CheckCodeService {
         String checkCode = RandomStringUtils.randomNumeric(6);
         // todo 存入Redis
         System.out.println("验证码："+phoneNumber+":"+checkCode);
+        redisService.saveCheckCode(phoneNumber,checkCode);
     }
 
     @Override
